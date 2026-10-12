@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="Add passkeys to your SaaS in 48 hours. Template $49 or done-for-you install $299.">
+<title data-i18n-title="hero.title">Add passkeys in 48h · PassGate</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Ccircle cx='12' cy='16' r='4' fill='none' stroke='%2334d399' stroke-width='2'/%3E%3Cpath d='M16 16h10m-3-3v6' fill='none' stroke='%2334d399' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script>
+try{const t=localStorage.getItem('passgate-theme');if(t)document.documentElement.dataset.theme=t;
+else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='light';}catch(e){}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="./">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="12" r="3.2"/><path d="M11 12h9m-3-3v6"/></svg></span>
+      <span data-i18n="brand">PassGate</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#why" data-i18n="nav.why">Why now</a>
+      <a href="#demo" data-i18n="nav.demo">Demo</a>
+      <a href="#scope" data-i18n="nav.scope">Scope</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="./template.html" data-i18n="nav.template">Template pack</a>
+    </nav>
+    <div class="nav-tools">
+      <label class="visually-hidden" for="lang-select" data-i18n="lang.label">Language</label>
+      <select id="lang-select" class="chip" aria-label="Language">
+        <option value="zh-CN">简体中文</option>
+        <option value="en">English</option>
+      </select>
+      <button type="button" class="chip" id="theme-toggle" data-i18n-aria="theme.dark" aria-label="Theme">◐</button>
+      <a class="btn btn-primary" href="#pricing" data-checkout data-i18n="nav.buy">Buy template</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><i></i><span data-i18n="hero.eyebrow">WebAuthn for small SaaS</span></div>
+        <h1 data-i18n="hero.title">Add passkeys to your SaaS in 48 hours</h1>
+        <p class="hero-lede" data-i18n="hero.lede">Ship passwordless login with a DIY template ($49) or book a fixed-fee install ($299).</p>
+        <div class="hero-ctas">
+          <button type="button" class="btn btn-primary btn-lg" data-checkout data-i18n="hero.cta.template">Buy template $49</button>
+          <button type="button" class="btn btn-lg btn-ghost" data-checkout data-i18n="hero.cta.install">Book install $299</button>
+        </div>
+        <p class="hero-note" data-i18n="hero.note">Checkout coming soon via Creem. No charge yet.</p>
+      </div>
+      <aside class="specimen" aria-label="Passkey UI specimen">
+        <div class="specimen-top">
+          <div>
+            <h3 data-i18n="specimen.title">Passkey sign-in</h3>
+            <p data-i18n="specimen.sub">Demo specimen</p>
+          </div>
+          <div class="key-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="12" r="3.2"/><path d="M11 12h9m-3-3v6"/></svg></div>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <div class="fake-input" data-i18n="specimen.email">you@company.com</div>
+        </div>
+        <button type="button" class="btn btn-primary" data-checkout data-i18n="specimen.continue">Continue with passkey</button>
+        <div class="specimen-or" data-i18n="specimen.or">or use recovery code</div>
+        <div class="specimen-meta" data-i18n="specimen.keys">2 passkeys · Face ID · security key</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="section-head"><h2 data-i18n="why.title">Why now</h2></div>
+      <div class="why-grid">
+        <article class="why-card"><div class="idx">01</div><h3 data-i18n="why.1.t"></h3><p data-i18n="why.1.d"></p></article>
+        <article class="why-card"><div class="idx">02</div><h3 data-i18n="why.2.t"></h3><p data-i18n="why.2.d"></p></article>
+        <article class="why-card"><div class="idx">03</div><h3 data-i18n="why.3.t"></h3><p data-i18n="why.3.d"></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="demo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="demo.title">30-second walkthrough</h2>
+        <p data-i18n="demo.lede"></p>
+      </div>
+      <div class="demo-frame">
+        <div class="demo-chrome">
+          <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="demo-url">demo.passgate.local / sign-in</div>
+        </div>
+        <div class="demo-stage">
+          <div class="badge"><span class="pulse" aria-hidden="true"></span><span data-i18n="demo.badge"></span></div>
+          <h3 data-i18n="demo.title"></h3>
+          <p data-i18n="demo.steps"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="scope">
+    <div class="wrap">
+      <div class="section-head"><h2 data-i18n="scope.title">In scope / out of scope</h2></div>
+      <div class="scope-grid">
+        <div class="scope-panel in">
+          <h3 data-i18n="scope.in.title">In</h3>
+          <ul>
+            <li data-i18n="scope.in.1"></li>
+            <li data-i18n="scope.in.2"></li>
+            <li data-i18n="scope.in.3"></li>
+            <li data-i18n="scope.in.4"></li>
+            <li data-i18n="scope.in.5"></li>
+          </ul>
+        </div>
+        <div class="scope-panel out">
+          <h3 data-i18n="scope.out.title">Out</h3>
+          <ul>
+            <li data-i18n="scope.out.1"></li>
+            <li data-i18n="scope.out.2"></li>
+            <li data-i18n="scope.out.3"></li>
+            <li data-i18n="scope.out.4"></li>
+            <li data-i18n="scope.out.5"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="pricing.title">Pricing</h2>
+        <p data-i18n="pricing.lede"></p>
+      </div>
+      <div class="price-grid">
+        <article class="price-card">
+          <h3 data-i18n="pricing.t1.name">Template</h3>
+          <div class="price" data-i18n="pricing.t1.price">$49</div>
+          <p class="desc" data-i18n="pricing.t1.desc"></p>
+          <ul>
+            <li data-i18n="pricing.t1.f1"></li>
+            <li data-i18n="pricing.t1.f2"></li>
+            <li data-i18n="pricing.t1.f3"></li>
+            <li data-i18n="pricing.t1.f4"></li>
+          </ul>
+          <button type="button" class="btn btn-ghost" data-checkout data-i18n="pricing.t1.cta"></button>
+          <span class="soon-tag" data-i18n="pricing.soon"></span>
+        </article>
+        <article class="price-card featured">
+          <span class="price-badge" data-i18n="pricing.t2.badge">Most booked</span>
+          <h3 data-i18n="pricing.t2.name">Install</h3>
+          <div class="price" data-i18n="pricing.t2.price">$299</div>
+          <p class="desc" data-i18n="pricing.t2.desc"></p>
+          <ul>
+            <li data-i18n="pricing.t2.f1"></li>
+            <li data-i18n="pricing.t2.f2"></li>
+            <li data-i18n="pricing.t2.f3"></li>
+            <li data-i18n="pricing.t2.f4"></li>
+          </ul>
+          <button type="button" class="btn btn-primary" data-checkout data-i18n="pricing.t2.cta"></button>
+          <span class="soon-tag" data-i18n="pricing.soon"></span>
+        </article>
+        <article class="price-card">
+          <h3 data-i18n="pricing.t3.name">Install + notes</h3>
+          <div class="price" data-i18n="pricing.t3.price">$499</div>
+          <p class="desc" data-i18n="pricing.t3.desc"></p>
+          <ul>
+            <li data-i18n="pricing.t3.f1"></li>
+            <li data-i18n="pricing.t3.f2"></li>
+            <li data-i18n="pricing.t3.f3"></li>
+            <li data-i18n="pricing.t3.f4"></li>
+          </ul>
+          <button type="button" class="btn btn-ghost" data-checkout data-i18n="pricing.t3.cta"></button>
+          <span class="soon-tag" data-i18n="pricing.soon"></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="stacks">
+    <div class="wrap">
+      <div class="section-head"><h2 data-i18n="stacks.title">Stacks</h2></div>
+      <div class="stacks">
+        <span class="stack-pill">Next.js</span>
+        <span class="stack-pill">SimpleWebAuthn</span>
+        <span class="stack-pill">Supabase Auth path</span>
+        <span class="stack-pill">Custom JWT session</span>
+        <span class="stack-pill">Clerk decision notes</span>
+      </div>
+      <p class="stacks-note" data-i18n="stacks.note"></p>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head"><h2 data-i18n="faq.title">FAQ</h2></div>
+      <div class="faq">
+        <details><summary data-i18n="faq.1.q"></summary><p data-i18n="faq.1.a"></p></details>
+        <details><summary data-i18n="faq.2.q"></summary><p data-i18n="faq.2.a"></p></details>
+        <details><summary data-i18n="faq.3.q"></summary><p data-i18n="faq.3.a"></p></details>
+        <details><summary data-i18n="faq.4.q"></summary><p data-i18n="faq.4.a"></p></details>
+        <details><summary data-i18n="faq.5.q"></summary><p data-i18n="faq.5.a"></p></details>
+      </div>
+      <div class="disc" style="margin-top:28px">
+        <h3 data-i18n="disc.title">Disclaimer</h3>
+        <p data-i18n="disc.body"></p>
+      </div>
+      <div class="final">
+        <div>
+          <h2 data-i18n="final.title"></h2>
+          <p data-i18n="final.lede"></p>
+        </div>
+        <a class="btn btn-primary btn-lg" href="./template.html" data-i18n="final.cta"></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span data-i18n="footer.tag">PassGate</span>
+    <span data-i18n="footer.contact"></span>
+  </div>
+</footer>
+
+<div class="modal" id="checkout-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <h3 id="modal-title" data-i18n="modal.title">Checkout coming soon</h3>
+    <p data-i18n="modal.body"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="modal-close" data-i18n="modal.close">Close</button>
+      <a class="btn btn-primary" href="./template.html" data-i18n="modal.go">Open template pack</a>
+    </div>
+  </div>
+</div>
+<script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+worker.mjs
+worker.sw.js
+worker.sw.js.b64
+cf_deploy_exec.js
+node_modules/
