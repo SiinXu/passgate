@@ -29,7 +29,7 @@ html[data-theme="light"] {
   --ink: #0a0a0a;
   --muted: #5c5c56;
   --line: rgba(10, 10, 10, 0.1);
-  --accent: #059669;
+  --accent: #047857;
   --accent-dim: color-mix(in oklab, #059669 14%, transparent);
   --accent-ink: #ffffff;
   --chrome: #6b7280;
