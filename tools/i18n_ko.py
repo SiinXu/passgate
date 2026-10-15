@@ -5,7 +5,7 @@ KO = {
 "hero.eyebrow":"작은 SaaS를 위한 WebAuthn","hero.title":"48시간 안에 SaaS에 패스키 추가",
 "hero.lede":"직접 적용하는 템플릿($49) 또는 고정 요금 설치 대행($299). 복구 코드, 브라우저 테스트 표, 바로 머지할 수 있는 PR까지.",
 "hero.cta.template":"템플릿 구매 $49","hero.cta.install":"설치 대행 예약 $299","hero.note":"결제는 곧 Creem으로 열립니다. 지금은 청구되지 않습니다.",
-"specimen.title":"패스키 로그인","specimen.sub":"데모 견본 — 실제 인증 엔드포인트가 아닙니다","specimen.email":"you@company.com","specimen.continue":"패스키로 계속","specimen.or":"또는 복구 코드 사용","specimen.keys":"패스키 2개 · Face ID · 보안 키",
+"specimen.title":"패스키 로그인","specimen.sub":"데모 견본 — 실제 인증 엔드포인트가 아닙니다","specimen.emailLabel":"이메일","specimen.email":"you@company.com","specimen.continue":"패스키로 계속","specimen.or":"또는 복구 코드 사용","specimen.keys":"패스키 2개 · Face ID · 보안 키",
 "why.title":"왜 지금인가",
 "why.1.t":"비밀번호 재설정은 숨은 비용","why.1.d":"재설정할 때마다 고객지원 시간이 들고, 돌아오지 않는 사용자도 생깁니다. 패스키는 이 과정을 기기 확인 한 번으로 줄입니다.",
 "why.2.t":"설계부터 피싱에 강함","why.2.d":"WebAuthn은 자격 증명을 RP ID에 묶기 때문에 가짜 도메인에서는 쓸 수 없습니다. 유출된 비밀번호가 기본 침입 경로가 되지 않습니다.",

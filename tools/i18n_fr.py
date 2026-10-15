@@ -5,7 +5,7 @@ FR = {
 "hero.eyebrow":"WebAuthn pour petits SaaS","hero.title":"Des passkeys dans votre SaaS en 48 heures",
 "hero.lede":"Connexion sans mot de passe avec un modèle à intégrer vous-même (49 $) ou une installation à prix fixe (299 $). Codes de récupération, matrice de navigateurs et une PR prête à fusionner.",
 "hero.cta.template":"Acheter le modèle 49 $","hero.cta.install":"Réserver l'installation 299 $","hero.note":"Paiement bientôt ouvert via Creem. Aucun débit pour l'instant.",
-"specimen.title":"Connexion par passkey","specimen.sub":"Maquette de démo — pas un vrai point d'authentification","specimen.email":"you@company.com","specimen.continue":"Continuer avec une passkey","specimen.or":"ou utiliser un code de récupération","specimen.keys":"2 passkeys · Face ID · clé de sécurité",
+"specimen.title":"Connexion par passkey","specimen.sub":"Maquette de démo — pas un vrai point d'authentification","specimen.emailLabel":"E-mail","specimen.email":"you@company.com","specimen.continue":"Continuer avec une passkey","specimen.or":"ou utiliser un code de récupération","specimen.keys":"2 passkeys · Face ID · clé de sécurité",
 "why.title":"Pourquoi maintenant",
 "why.1.t":"Les réinitialisations coûtent en silence","why.1.d":"Chaque réinitialisation de mot de passe prend du temps au support et certains utilisateurs ne reviennent pas. Les passkeys réduisent tout à une invite sur l'appareil.",
 "why.2.t":"Résistant au phishing par conception","why.2.d":"WebAuthn lie chaque identifiant à votre RP ID : un domaine imitateur ne peut pas l'utiliser. Les mots de passe volés cessent d'être la porte d'entrée par défaut.",

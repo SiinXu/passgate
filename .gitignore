@@ -7,3 +7,5 @@ shots/v2/
 shots/lh*.json
 __pycache__/
 tools/zh-TW.raw.json
+audit/before/
+audit/after/

@@ -5,7 +5,7 @@ VI = {
 "hero.eyebrow":"WebAuthn cho SaaS nhỏ","hero.title":"Thêm passkey cho SaaS của bạn trong 48 giờ",
 "hero.lede":"Đăng nhập không mật khẩu với gói mẫu tự làm ($49) hoặc đặt dịch vụ cài đặt giá cố định ($299). Có mã khôi phục, ma trận trình duyệt và một PR sẵn sàng để merge.",
 "hero.cta.template":"Mua gói mẫu $49","hero.cta.install":"Đặt cài đặt $299","hero.note":"Thanh toán qua Creem sắp mở. Hiện chưa thu tiền.",
-"specimen.title":"Đăng nhập bằng passkey","specimen.sub":"Mẫu minh họa — không phải endpoint xác thực thật","specimen.email":"you@company.com","specimen.continue":"Tiếp tục với passkey","specimen.or":"hoặc dùng mã khôi phục","specimen.keys":"2 passkey · Face ID · khóa bảo mật",
+"specimen.title":"Đăng nhập bằng passkey","specimen.sub":"Mẫu minh họa — không phải endpoint xác thực thật","specimen.emailLabel":"Email","specimen.email":"you@company.com","specimen.continue":"Tiếp tục với passkey","specimen.or":"hoặc dùng mã khôi phục","specimen.keys":"2 passkey · Face ID · khóa bảo mật",
 "why.title":"Vì sao lúc này",
 "why.1.t":"Yêu cầu đặt lại mật khẩu là chi phí ngầm","why.1.d":"Mỗi lần đặt lại mật khẩu tốn thời gian hỗ trợ, và có người dùng không quay lại. Passkey biến cả quy trình thành một lần xác nhận trên thiết bị.",
 "why.2.t":"Chống lừa đảo ngay từ thiết kế","why.2.d":"WebAuthn gắn mỗi thông tin xác thực với RP ID của bạn, nên tên miền giả mạo không dùng được. Mật khẩu bị đánh cắp không còn là cửa vào mặc định.",

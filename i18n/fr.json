@@ -18,6 +18,7 @@
  "hero.note": "Paiement bientôt ouvert via Creem. Aucun débit pour l'instant.",
  "specimen.title": "Connexion par passkey",
  "specimen.sub": "Maquette de démo — pas un vrai point d'authentification",
+ "specimen.emailLabel": "E-mail",
  "specimen.email": "you@company.com",
  "specimen.continue": "Continuer avec une passkey",
  "specimen.or": "ou utiliser un code de récupération",

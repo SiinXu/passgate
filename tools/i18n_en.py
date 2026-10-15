@@ -5,7 +5,7 @@ EN = {
 "hero.eyebrow":"WebAuthn for small SaaS","hero.title":"Add passkeys to your SaaS in 48 hours",
 "hero.lede":"Ship passwordless login with a DIY template ($49) or book a fixed-fee install ($299). Recovery codes, browser matrix, and a PR you can merge.",
 "hero.cta.template":"Buy template $49","hero.cta.install":"Book install $299","hero.note":"Checkout opens soon via Creem. Nothing is charged yet.",
-"specimen.title":"Passkey sign-in","specimen.sub":"Demo specimen — not a live auth endpoint","specimen.email":"you@company.com","specimen.continue":"Continue with passkey","specimen.or":"or use recovery code","specimen.keys":"2 passkeys · Face ID · security key",
+"specimen.title":"Passkey sign-in","specimen.sub":"Demo specimen — not a live auth endpoint","specimen.emailLabel":"Email","specimen.email":"you@company.com","specimen.continue":"Continue with passkey","specimen.or":"or use recovery code","specimen.keys":"2 passkeys · Face ID · security key",
 "why.title":"Why now",
 "why.1.t":"Reset tickets are silent burn","why.1.d":"Every password reset costs support time and some users never come back. Passkeys turn the loop into one device prompt.",
 "why.2.t":"Phishing-resistant by design","why.2.d":"WebAuthn binds each credential to your RP ID, so a look-alike domain cannot use it. Stolen passwords stop being the default way in.",

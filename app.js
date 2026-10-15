@@ -5,6 +5,7 @@
   ];
   const SUPPORTED = LANGS.map((l) => l[0]);
   const dict = {};
+  const V = "__V__";
   let current = "en";
 
   function fromTag(tag) {
@@ -54,7 +55,7 @@
 
   async function loadDict(lang) {
     if (dict[lang]) return dict[lang];
-    const res = await fetch(`./i18n/${lang}.json`);
+    const res = await fetch(`./i18n/${lang}.json?v=${V}`);
     dict[lang] = await res.json();
     return dict[lang];
   }
@@ -160,6 +161,10 @@
     const panels = [...root.querySelectorAll("[data-panel]")];
     const url = root.querySelector("[data-demo-url]");
     const urls = ["demo.passgate.local / sign-up", "demo.passgate.local / sign-up · passkey", "demo.passgate.local / settings / passkeys"];
+    tabs.forEach((t, k) => {
+      t.id = "demo-tab-" + k;
+      if (panels[k]) { panels[k].id = "demo-panel-" + k; panels[k].setAttribute("role", "tabpanel"); panels[k].setAttribute("aria-labelledby", t.id); t.setAttribute("aria-controls", panels[k].id); }
+    });
     let i = 0;
     const go = (n) => {
       i = (n + panels.length) % panels.length;
@@ -198,7 +203,8 @@
   async function boot() {
     setTheme(detectTheme());
     wireLangSelect();
-    await setLang(detectLang(), false);
+    await setLang(SUPPORTED.includes(window.__pgLang) ? window.__pgLang : detectLang(), false).catch(() => {});
+    document.documentElement.classList.remove("i18n-wait");
     document.getElementById("theme-toggle")?.addEventListener("click", () => {
       setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
     });

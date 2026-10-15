@@ -5,7 +5,7 @@ MS = {
 "hero.eyebrow":"WebAuthn untuk SaaS kecil","hero.title":"Tambah passkey pada SaaS anda dalam 48 jam",
 "hero.lede":"Log masuk tanpa kata laluan dengan templat buat sendiri ($49) atau pemasangan harga tetap ($299). Kod pemulihan, matriks pelayar dan PR yang sedia digabungkan.",
 "hero.cta.template":"Beli templat $49","hero.cta.install":"Tempah pemasangan $299","hero.note":"Pembayaran melalui Creem akan dibuka tidak lama lagi. Belum ada caj.",
-"specimen.title":"Log masuk passkey","specimen.sub":"Contoh demo — bukan titik akhir pengesahan sebenar","specimen.email":"you@company.com","specimen.continue":"Teruskan dengan passkey","specimen.or":"atau guna kod pemulihan","specimen.keys":"2 passkey · Face ID · kunci keselamatan",
+"specimen.title":"Log masuk passkey","specimen.sub":"Contoh demo — bukan titik akhir pengesahan sebenar","specimen.emailLabel":"E-mel","specimen.email":"you@company.com","specimen.continue":"Teruskan dengan passkey","specimen.or":"atau guna kod pemulihan","specimen.keys":"2 passkey · Face ID · kunci keselamatan",
 "why.title":"Kenapa sekarang",
 "why.1.t":"Tiket set semula kata laluan ialah kos tersembunyi","why.1.d":"Setiap set semula kata laluan memakan masa sokongan dan ada pengguna yang tidak kembali. Passkey menjadikannya satu pengesahan pada peranti.",
 "why.2.t":"Tahan pancingan data sejak reka bentuk","why.2.d":"WebAuthn mengikat setiap kelayakan pada RP ID anda, jadi domain tiruan tidak boleh menggunakannya. Kata laluan curi bukan lagi jalan masuk lalai.",

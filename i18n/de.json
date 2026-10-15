@@ -18,6 +18,7 @@
  "hero.note": "Bezahlung über Creem startet bald. Es wird noch nichts berechnet.",
  "specimen.title": "Anmelden mit Passkey",
  "specimen.sub": "Demo-Muster — kein echter Auth-Endpunkt",
+ "specimen.emailLabel": "E-Mail",
  "specimen.email": "you@company.com",
  "specimen.continue": "Mit Passkey fortfahren",
  "specimen.or": "oder Wiederherstellungscode nutzen",

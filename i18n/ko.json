@@ -18,6 +18,7 @@
  "hero.note": "결제는 곧 Creem으로 열립니다. 지금은 청구되지 않습니다.",
  "specimen.title": "패스키 로그인",
  "specimen.sub": "데모 견본 — 실제 인증 엔드포인트가 아닙니다",
+ "specimen.emailLabel": "이메일",
  "specimen.email": "you@company.com",
  "specimen.continue": "패스키로 계속",
  "specimen.or": "또는 복구 코드 사용",

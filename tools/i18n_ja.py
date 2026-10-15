@@ -5,7 +5,7 @@ JA = {
 "hero.eyebrow":"小規模 SaaS のための WebAuthn","hero.title":"48 時間で SaaS にパスキーを",
 "hero.lede":"自分で組み込むテンプレート（$49）か、固定料金の導入代行（$299）。リカバリーコード、ブラウザ検証表、そのままマージできる PR 付き。",
 "hero.cta.template":"テンプレートを購入 $49","hero.cta.install":"導入代行を予約 $299","hero.note":"決済は Creem で近日開始。現在は課金されません。",
-"specimen.title":"パスキーでサインイン","specimen.sub":"デモ用の見本 — 実際の認証エンドポイントではありません","specimen.email":"you@company.com","specimen.continue":"パスキーで続行","specimen.or":"またはリカバリーコードを使う","specimen.keys":"パスキー 2 件 · Face ID · セキュリティキー",
+"specimen.title":"パスキーでサインイン","specimen.sub":"デモ用の見本 — 実際の認証エンドポイントではありません","specimen.emailLabel":"メールアドレス","specimen.email":"you@company.com","specimen.continue":"パスキーで続行","specimen.or":"またはリカバリーコードを使う","specimen.keys":"パスキー 2 件 · Face ID · セキュリティキー",
 "why.title":"なぜ今なのか",
 "why.1.t":"パスワード再設定は見えないコスト","why.1.d":"再設定のたびにサポートの時間がかかり、戻ってこないユーザーもいます。パスキーなら端末での確認 1 回で済みます。",
 "why.2.t":"設計上フィッシングに強い","why.2.d":"WebAuthn は認証情報を RP ID に結び付けるため、偽ドメインでは使えません。盗まれたパスワードが侵入口になりにくくなります。",

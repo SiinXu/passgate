@@ -18,6 +18,7 @@
  "hero.note": "Thanh toán qua Creem sắp mở. Hiện chưa thu tiền.",
  "specimen.title": "Đăng nhập bằng passkey",
  "specimen.sub": "Mẫu minh họa — không phải endpoint xác thực thật",
+ "specimen.emailLabel": "Email",
  "specimen.email": "you@company.com",
  "specimen.continue": "Tiếp tục với passkey",
  "specimen.or": "hoặc dùng mã khôi phục",

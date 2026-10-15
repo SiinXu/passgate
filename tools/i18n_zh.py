@@ -5,7 +5,7 @@ ZH_CN = {
 "hero.eyebrow":"给小型 SaaS 的 WebAuthn","hero.title":"48 小时为你的 SaaS 加上 Passkey",
 "hero.lede":"自助模板 $49，或固定价代接入 $299。含恢复码、浏览器测试矩阵，以及一个可直接合并的 PR。",
 "hero.cta.template":"购买模板 $49","hero.cta.install":"预约代接入 $299","hero.note":"收款即将通过 Creem 开通，现在不会扣款。",
-"specimen.title":"Passkey 登录","specimen.sub":"示意标本 · 非真实鉴权接口","specimen.email":"you@company.com","specimen.continue":"使用 Passkey 继续","specimen.or":"或使用恢复码","specimen.keys":"2 个 Passkey · Face ID · 安全密钥",
+"specimen.title":"Passkey 登录","specimen.sub":"示意标本 · 非真实鉴权接口","specimen.emailLabel":"邮箱","specimen.email":"you@company.com","specimen.continue":"使用 Passkey 继续","specimen.or":"或使用恢复码","specimen.keys":"2 个 Passkey · Face ID · 安全密钥",
 "why.title":"为何现在做",
 "why.1.t":"重置工单是隐形成本","why.1.d":"每次密码重置都要占用客服时间，也有用户就此流失。Passkey 把整个流程变成一次设备确认。",
 "why.2.t":"天生更抗钓鱼","why.2.d":"WebAuthn 把每个凭证绑定到你的 RP ID，仿冒域名拿不到也用不了。被盗密码不再是默认突破口。",

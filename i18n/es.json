@@ -18,6 +18,7 @@
  "hero.note": "El pago con Creem abre pronto. Todavía no se cobra nada.",
  "specimen.title": "Iniciar sesión con passkey",
  "specimen.sub": "Muestra de demo — no es un endpoint de autenticación real",
+ "specimen.emailLabel": "Correo",
  "specimen.email": "you@company.com",
  "specimen.continue": "Continuar con passkey",
  "specimen.or": "o usar un código de recuperación",

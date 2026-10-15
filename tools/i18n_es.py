@@ -5,7 +5,7 @@ ES = {
 "hero.eyebrow":"WebAuthn para SaaS pequeños","hero.title":"Passkeys en tu SaaS en 48 horas",
 "hero.lede":"Inicio de sesión sin contraseña con una plantilla para integrar tú mismo (49 $) o una instalación a precio fijo (299 $). Códigos de recuperación, matriz de navegadores y un PR listo para fusionar.",
 "hero.cta.template":"Comprar plantilla 49 $","hero.cta.install":"Reservar instalación 299 $","hero.note":"El pago con Creem abre pronto. Todavía no se cobra nada.",
-"specimen.title":"Iniciar sesión con passkey","specimen.sub":"Muestra de demo — no es un endpoint de autenticación real","specimen.email":"you@company.com","specimen.continue":"Continuar con passkey","specimen.or":"o usar un código de recuperación","specimen.keys":"2 passkeys · Face ID · llave de seguridad",
+"specimen.title":"Iniciar sesión con passkey","specimen.sub":"Muestra de demo — no es un endpoint de autenticación real","specimen.emailLabel":"Correo","specimen.email":"you@company.com","specimen.continue":"Continuar con passkey","specimen.or":"o usar un código de recuperación","specimen.keys":"2 passkeys · Face ID · llave de seguridad",
 "why.title":"Por qué ahora",
 "why.1.t":"Los restablecimientos cuestan en silencio","why.1.d":"Cada restablecimiento de contraseña consume tiempo de soporte y algunos usuarios no vuelven. Las passkeys lo reducen a una confirmación en el dispositivo.",
 "why.2.t":"Resistente al phishing por diseño","why.2.d":"WebAuthn vincula cada credencial a tu RP ID, así que un dominio falso no puede usarla. Las contraseñas robadas dejan de ser la entrada por defecto.",

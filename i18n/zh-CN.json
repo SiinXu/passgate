@@ -18,6 +18,7 @@
  "hero.note": "收款即将通过 Creem 开通，现在不会扣款。",
  "specimen.title": "Passkey 登录",
  "specimen.sub": "示意标本 · 非真实鉴权接口",
+ "specimen.emailLabel": "邮箱",
  "specimen.email": "you@company.com",
  "specimen.continue": "使用 Passkey 继续",
  "specimen.or": "或使用恢复码",

@@ -18,6 +18,7 @@
  "hero.note": "Checkout opens soon via Creem. Nothing is charged yet.",
  "specimen.title": "Passkey sign-in",
  "specimen.sub": "Demo specimen — not a live auth endpoint",
+ "specimen.emailLabel": "Email",
  "specimen.email": "you@company.com",
  "specimen.continue": "Continue with passkey",
  "specimen.or": "or use recovery code",

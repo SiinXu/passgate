@@ -5,7 +5,7 @@ DE = {
 "hero.eyebrow":"WebAuthn für kleine SaaS","hero.title":"Passkeys für dein SaaS in 48 Stunden",
 "hero.lede":"Passwortloser Login mit einem Template zum Selbsteinbauen (49 $) oder einer Installation zum Festpreis (299 $). Mit Wiederherstellungscodes, Browser-Matrix und einem mergefertigen PR.",
 "hero.cta.template":"Template kaufen 49 $","hero.cta.install":"Installation buchen 299 $","hero.note":"Bezahlung über Creem startet bald. Es wird noch nichts berechnet.",
-"specimen.title":"Anmelden mit Passkey","specimen.sub":"Demo-Muster — kein echter Auth-Endpunkt","specimen.email":"you@company.com","specimen.continue":"Mit Passkey fortfahren","specimen.or":"oder Wiederherstellungscode nutzen","specimen.keys":"2 Passkeys · Face ID · Sicherheitsschlüssel",
+"specimen.title":"Anmelden mit Passkey","specimen.sub":"Demo-Muster — kein echter Auth-Endpunkt","specimen.emailLabel":"E-Mail","specimen.email":"you@company.com","specimen.continue":"Mit Passkey fortfahren","specimen.or":"oder Wiederherstellungscode nutzen","specimen.keys":"2 Passkeys · Face ID · Sicherheitsschlüssel",
 "why.title":"Warum jetzt",
 "why.1.t":"Passwort-Resets kosten leise","why.1.d":"Jeder Reset kostet Support-Zeit, und manche Nutzer kommen nicht zurück. Passkeys machen daraus eine einzige Bestätigung am Gerät.",
 "why.2.t":"Phishing-resistent by design","why.2.d":"WebAuthn bindet jede Anmeldeinformation an deine RP ID, eine nachgeahmte Domain kann sie nicht nutzen. Gestohlene Passwörter sind nicht mehr der Standard-Einstieg.",
