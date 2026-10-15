@@ -18,5 +18,5 @@ const code=`async () => {
   const doms=await cloudflare.request({method:"GET",path:"/accounts/"+accountId+"/workers/domains",query:{service:"passgate"}});
   return {ok:up.success,errors:up.errors,domains:(doms.result||[]).map(d=>d.hostname)};
 }`;
-fs.writeFileSync("cf_deploy_exec.js",code);fs.writeFileSync("deploy-v2.js",code);
+fs.writeFileSync("cf_deploy_exec.js",code);fs.writeFileSync("deploy-v3.js",code);
 console.log("V",V,"worker bytes",worker.length,"code bytes",code.length);
