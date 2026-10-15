@@ -3,3 +3,7 @@ worker.sw.js
 worker.sw.js.b64
 cf_deploy_exec.js
 node_modules/
+shots/v2/
+shots/lh*.json
+__pycache__/
+tools/zh-TW.raw.json

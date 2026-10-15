@@ -17,7 +17,7 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
 </script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="./">
@@ -34,11 +34,8 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
     </nav>
     <div class="nav-tools">
       <label class="visually-hidden" for="lang-select" data-i18n="lang.label">Language</label>
-      <select id="lang-select" class="chip" aria-label="Language">
-        <option value="zh-CN">简体中文</option>
-        <option value="en">English</option>
-      </select>
-      <button type="button" class="chip" id="theme-toggle" data-i18n-aria="theme.dark" aria-label="Theme">◐</button>
+      <select id="lang-select" class="chip" aria-label="Language"></select>
+      <button type="button" class="chip" id="theme-toggle" data-i18n-aria="theme.toggle" aria-label="Theme">◐</button>
       <a class="btn btn-primary" href="#pricing" data-checkout data-i18n="nav.buy">Buy template</a>
     </div>
   </div>
@@ -93,16 +90,43 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
         <h2 data-i18n="demo.title">30-second walkthrough</h2>
         <p data-i18n="demo.lede"></p>
       </div>
-      <div class="demo-frame">
+      <div class="demo-frame" data-demo>
         <div class="demo-chrome">
           <div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="demo-url">demo.passgate.local / sign-in</div>
+          <div class="demo-url" data-demo-url>demo.passgate.local / sign-up</div>
         </div>
-        <div class="demo-stage">
-          <div class="badge"><span class="pulse" aria-hidden="true"></span><span data-i18n="demo.badge"></span></div>
-          <p class="demo-title" data-i18n="demo.title"></p>
-          <p data-i18n="demo.steps"></p>
+        <div class="demo-body">
+          <ol class="demo-steps" role="tablist" aria-label="Walkthrough">
+            <li><button type="button" role="tab" aria-selected="true" data-step="0"><span class="mono">01</span><span><b data-i18n="demo.s1.t">Create account</b><small data-i18n="demo.s1.d"></small></span></button></li>
+            <li><button type="button" role="tab" aria-selected="false" data-step="1"><span class="mono">02</span><span><b data-i18n="demo.s2.t">Device passkey</b><small data-i18n="demo.s2.d"></small></span></button></li>
+            <li><button type="button" role="tab" aria-selected="false" data-step="2"><span class="mono">03</span><span><b data-i18n="demo.s3.t">Manage keys</b><small data-i18n="demo.s3.d"></small></span></button></li>
+          </ol>
+          <div class="demo-stage" aria-live="polite">
+            <div class="ds-panel is-on" data-panel="0">
+              <p class="ds-title" data-i18n="demo.p1.title">Create your account</p>
+              <div class="fake-input">ana@acme.dev</div>
+              <button type="button" class="btn btn-primary" data-next data-i18n="demo.p1.cta">Create passkey</button>
+              <p class="ds-fine" data-i18n="demo.p1.fine">No password field.</p>
+            </div>
+            <div class="ds-panel" data-panel="1">
+              <div class="os-sheet">
+                <div class="key-orb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="12" r="3.2"/><path d="M11 12h9m-3-3v6"/></svg></div>
+                <p class="ds-title" data-i18n="demo.p2.title">Save a passkey for demo.passgate.local?</p>
+                <p class="ds-fine" data-i18n="demo.p2.fine">Your device asks for Face ID, fingerprint or screen lock.</p>
+                <button type="button" class="btn btn-primary" data-next data-i18n="demo.p2.cta">Continue</button>
+              </div>
+            </div>
+            <div class="ds-panel" data-panel="2">
+              <div class="mock-keys">
+                <div class="mk-head"><strong data-i18n="mock.keys.title">Passkeys</strong></div>
+                <div class="mk-row"><span class="mk-dot"></span><div><b>MacBook Pro · Touch ID</b><small data-i18n="mock.keys.r1"></small></div><span class="mk-act" data-i18n="mock.keys.revoke">Revoke</span></div>
+                <div class="mk-row"><span class="mk-dot"></span><div><b>iPhone · iCloud Keychain</b><small data-i18n="mock.keys.r2"></small></div><span class="mk-act" data-i18n="mock.keys.revoke">Revoke</span></div>
+              </div>
+              <button type="button" class="btn btn-ghost btn-sm" data-restart data-i18n="demo.restart">Replay</button>
+            </div>
+          </div>
         </div>
+        <p class="demo-foot" data-i18n="demo.fine">Simulated UI. No real WebAuthn call is made on this page.</p>
       </div>
     </div>
   </section>
@@ -153,10 +177,10 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
             <li data-i18n="pricing.t1.f4"></li>
           </ul>
           <button type="button" class="btn btn-ghost" data-checkout data-i18n="pricing.t1.cta"></button>
-          <span class="soon-tag" data-i18n="pricing.soon"></span>
+          <span class="soon-tag" data-i18n="soon"></span>
         </article>
         <article class="price-card featured">
-          <span class="price-badge" data-i18n="pricing.t2.badge">Most booked</span>
+          <span class="price-badge" data-i18n="pricing.t2.badge">Recommended</span>
           <h3 data-i18n="pricing.t2.name">Install</h3>
           <div class="price" data-i18n="pricing.t2.price">$299</div>
           <p class="desc" data-i18n="pricing.t2.desc"></p>
@@ -167,7 +191,7 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
             <li data-i18n="pricing.t2.f4"></li>
           </ul>
           <button type="button" class="btn btn-primary" data-checkout data-i18n="pricing.t2.cta"></button>
-          <span class="soon-tag" data-i18n="pricing.soon"></span>
+          <span class="soon-tag" data-i18n="soon"></span>
         </article>
         <article class="price-card">
           <h3 data-i18n="pricing.t3.name">Install + notes</h3>
@@ -180,7 +204,7 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
             <li data-i18n="pricing.t3.f4"></li>
           </ul>
           <button type="button" class="btn btn-ghost" data-checkout data-i18n="pricing.t3.cta"></button>
-          <span class="soon-tag" data-i18n="pricing.soon"></span>
+          <span class="soon-tag" data-i18n="soon"></span>
         </article>
       </div>
     </div>
@@ -210,7 +234,7 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
         <details><summary data-i18n="faq.4.q"></summary><p data-i18n="faq.4.a"></p></details>
         <details><summary data-i18n="faq.5.q"></summary><p data-i18n="faq.5.a"></p></details>
       </div>
-      <div class="disc" style="margin-top:28px">
+      <div class="disc">
         <p class="disc-title" data-i18n="disc.title">Disclaimer</p>
         <p data-i18n="disc.body"></p>
       </div>

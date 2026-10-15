@@ -121,3 +121,6 @@ Template page: ZIP tree + order form placeholder (no live Creem).
 
 ## Non-goals
 Purple AI mesh, Instrument Serif, paper-orange Carbon, fake payment success, claiming security audit.
+
+## v2 addendum (review fixes, same tokens)
+No new palette or fonts. Added components reuse existing grammar: browser chrome from shadcn Blocks (#7) for the walkthrough and the illustrative settings screen; spring expand (Motion.dev #10, `cubic-bezier(.2,.9,.3,1.25)`) on file accordions and walkthrough panels; numbered mono `01–03` only on the true sequence (Beautiful UI #9); changelog timeline as a hairline rail with emerald dots (Linear changelog structure, no colour borrowed). Reduced-motion still flattens all transitions.

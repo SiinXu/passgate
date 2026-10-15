@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark light">
-<meta name="description" content="PassGate template pack — Next.js WebAuthn, Supabase migration, CHECKLIST 30, TEST_PLAN.">
+<meta name="description" content="PassGate template pack — Next.js WebAuthn example, Supabase migration, Clerk decision notes, 30-item CHECKLIST, browser TEST_PLAN, commercial license.">
 <title data-i18n-title="tpl.title">Template pack · PassGate</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Ccircle cx='12' cy='16' r='4' fill='none' stroke='%2334d399' stroke-width='2'/%3E%3Cpath d='M16 16h10m-3-3v6' fill='none' stroke='%2334d399' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +17,7 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
 </script>
 </head>
 <body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="./">
@@ -24,15 +25,17 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
       <span data-i18n="brand">PassGate</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="#files" data-i18n="tpl.nav.files">Files</a>
+      <a href="#compat" data-i18n="tpl.nav.compat">Compatibility</a>
+      <a href="#license" data-i18n="tpl.nav.license">License</a>
+      <a href="#tpl-faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#changelog" data-i18n="tpl.nav.changelog">Changelog</a>
       <a href="./#pricing" data-i18n="nav.pricing">Pricing</a>
-      <a href="./template.html" data-i18n="nav.template">Template pack</a>
     </nav>
     <div class="nav-tools">
-      <select id="lang-select" class="chip" aria-label="Language">
-        <option value="zh-CN">简体中文</option>
-        <option value="en">English</option>
-      </select>
-      <button type="button" class="chip" id="theme-toggle" aria-label="Theme">◐</button>
+      <label class="visually-hidden" for="lang-select" data-i18n="lang.label">Language</label>
+      <select id="lang-select" class="chip" aria-label="Language"></select>
+      <button type="button" class="chip" id="theme-toggle" data-i18n-aria="theme.toggle" aria-label="Theme">◐</button>
       <button type="button" class="btn btn-primary" data-checkout data-i18n="nav.buy">Buy template</button>
     </div>
   </div>
@@ -40,53 +43,256 @@ else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentEle
 
 <main id="main" class="wrap tpl-hero">
   <a class="back" href="./" data-i18n="tpl.back">← Back</a>
-  <p class="eyebrow" style="margin-top:18px"><i></i><span data-i18n="tpl.hero">Template pack</span></p>
-  <h1 data-i18n="tpl.title">Everything in the $49 ZIP</h1>
-  <p class="hero-lede" data-i18n="tpl.lede"></p>
+  <div class="tpl-head">
+    <div>
+      <p class="eyebrow" style="margin-top:18px"><i></i><span data-i18n="tpl.hero">Template pack</span></p>
+      <h1 data-i18n="tpl.title">Everything in the $49 ZIP</h1>
+      <p class="hero-lede" data-i18n="tpl.lede"></p>
+    </div>
+    <dl class="meta-strip">
+      <div><dt data-i18n="tpl.meta.version">Version</dt><dd><span class="mono">v0.1</span> <span class="tag" data-i18n="tpl.meta.pre">pre-release</span></dd></div>
+      <div><dt data-i18n="tpl.meta.updated">Page updated</dt><dd class="mono">2026-10-14</dd></div>
+      <div><dt data-i18n="tpl.meta.format">Format</dt><dd data-i18n="tpl.meta.format.v">ZIP · TypeScript + SQL + Markdown</dd></div>
+      <div><dt data-i18n="tpl.meta.sample">Free sample</dt><dd><a class="link" href="./samples/CHECKLIST.md" download data-i18n="tpl.meta.sample.v">CHECKLIST.md ↓</a></dd></div>
+    </dl>
+  </div>
 
-  <div class="tpl-grid">
-    <section class="tree">
-      <h2 data-i18n="tpl.tree.title">Archive layout</h2>
-      <ol>
-        <li data-i18n="tpl.tree.1"></li>
-        <li data-i18n="tpl.tree.2"></li>
-        <li data-i18n="tpl.tree.3"></li>
-        <li data-i18n="tpl.tree.4"></li>
-        <li data-i18n="tpl.tree.5"></li>
-        <li data-i18n="tpl.tree.6"></li>
-      </ol>
-    </section>
-    <section class="form-card">
-      <h2 data-i18n="tpl.form.title">Notify / order placeholder</h2>
-      <form id="interest-form">
-        <div class="field">
-          <label for="email" data-i18n="tpl.form.email">Work email</label>
-          <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
+  <div class="local-notice" role="note">
+    <span class="ln-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+    <div>
+      <p class="ln-title" data-i18n="tpl.local.title">The interest form is stored only in this browser</p>
+      <p data-i18n="tpl.local.body">Nothing is sent to a server, no order is created and nothing is charged. Checkout opens later via Creem.</p>
+    </div>
+  </div>
+
+  <div class="tpl-layout">
+    <div class="tpl-main">
+      <section id="files" class="tpl-sec">
+        <div class="sec-row">
+          <h2 data-i18n="tpl.tree.title">Archive layout</h2>
+          <div class="sec-tools">
+            <button type="button" class="chip chip-sm" data-expand="open" data-i18n="tpl.expand">Expand all</button>
+            <button type="button" class="chip chip-sm" data-expand="close" data-i18n="tpl.collapse">Collapse all</button>
+          </div>
         </div>
-        <div class="field">
-          <label for="plan" data-i18n="tpl.form.plan">Plan</label>
-          <select id="plan" name="plan">
-            <option value="template" data-i18n="tpl.form.plan.t">Template $49</option>
-            <option value="install" data-i18n="tpl.form.plan.i">Install $299</option>
-            <option value="plus" data-i18n="tpl.form.plan.p">Install + notes $499</option>
-          </select>
+        <p class="sec-lede" data-i18n="tpl.tree.lede"></p>
+
+        <div class="files">
+          <details class="file" open>
+            <summary><span class="f-ic dir" aria-hidden="true"></span><code>templates/nextjs-webauthn/</code><span class="f-sum" data-i18n="tpl.f1.sum"></span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f1.what"></p>
+              <ul class="f-list">
+                <li data-i18n="tpl.f1.l1"></li><li data-i18n="tpl.f1.l2"></li><li data-i18n="tpl.f1.l3"></li><li data-i18n="tpl.f1.l4"></li>
+              </ul>
+              <div class="code"><div class="code-bar"><span class="mono">app/api/passkey/register/options/route.ts</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>import { generateRegistrationOptions } from "@simplewebauthn/server";
+
+const options = await generateRegistrationOptions({
+  rpName: "Acme",
+  rpID: process.env.RP_ID!, // e.g. app.acme.com
+  userName: user.email,
+  excludeCredentials: user.passkeys.map((k) =&gt; ({ id: k.credentialId })),
+  authenticatorSelection: { residentKey: "preferred", userVerification: "preferred" },
+});</code></pre></div>
+              <figure class="shot">
+                <div class="shot-frame">
+                  <div class="demo-chrome"><div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div><div class="demo-url">localhost:3000 / settings / passkeys</div></div>
+                  <div class="mock-keys">
+                    <div class="mk-head"><strong data-i18n="mock.keys.title">Passkeys</strong><span class="btn btn-primary btn-xs" aria-hidden="true" data-i18n="mock.keys.add">Add passkey</span></div>
+                    <div class="mk-row"><span class="mk-dot"></span><div><b>MacBook Pro · Touch ID</b><small data-i18n="mock.keys.r1">Created today · last used 2 min ago</small></div><span class="mk-act" data-i18n="mock.keys.revoke">Revoke</span></div>
+                    <div class="mk-row"><span class="mk-dot"></span><div><b>iPhone · iCloud Keychain</b><small data-i18n="mock.keys.r2">Synced passkey · last used yesterday</small></div><span class="mk-act" data-i18n="mock.keys.revoke">Revoke</span></div>
+                    <div class="mk-row muted"><span class="mk-dot off"></span><div><b data-i18n="mock.keys.rc">Recovery codes</b><small data-i18n="mock.keys.r3">8 of 10 unused · shown once at creation</small></div><span class="mk-act" data-i18n="mock.keys.regen">Regenerate</span></div>
+                  </div>
+                </div>
+                <figcaption data-i18n="tpl.shot.cap1">Illustrative HTML render of the settings screen in the example app — not a product screenshot.</figcaption>
+              </figure>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic dir" aria-hidden="true"></span><code>templates/supabase-migration/</code><span class="f-sum" data-i18n="tpl.f2.sum"></span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f2.what"></p>
+              <ol class="f-steps">
+                <li data-i18n="tpl.f2.s1"></li><li data-i18n="tpl.f2.s2"></li><li data-i18n="tpl.f2.s3"></li><li data-i18n="tpl.f2.s4"></li>
+              </ol>
+              <div class="code"><div class="code-bar"><span class="mono">migrations/001_passkeys.sql</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>create table public.passkeys (
+  id           text primary key,  -- credential ID, base64url
+  user_id      uuid not null references auth.users (id) on delete cascade,
+  public_key   bytea not null,
+  counter      bigint not null default 0,
+  transports   text[],
+  created_at   timestamptz not null default now()
+);
+alter table public.passkeys enable row level security;</code></pre></div>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>templates/clerk-alternative-notes.md</code><span class="f-sum" data-i18n="tpl.f3.sum"></span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f3.what"></p>
+              <div class="split2">
+                <div class="mini-card"><h4 data-i18n="tpl.f3.keep">Keep Clerk if</h4><ul class="f-list"><li data-i18n="tpl.f3.k1"></li><li data-i18n="tpl.f3.k2"></li></ul></div>
+                <div class="mini-card"><h4 data-i18n="tpl.f3.move">Move out if</h4><ul class="f-list"><li data-i18n="tpl.f3.m1"></li><li data-i18n="tpl.f3.m2"></li></ul></div>
+              </div>
+              <div class="code"><div class="code-bar"><span class="mono">clerk-alternative-notes.md</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>## Decision in one question
+Do you need to own the credential table and the session format?
+- No  → keep Clerk, turn on its passkey option, stop here.
+- Yes → follow supabase-migration/ or the custom-JWT path.
+
+We do not reverse-engineer or bypass Clerk.</code></pre></div>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>CHECKLIST.md</code><span class="f-sum" data-i18n="tpl.f4.sum"></span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f4.what"></p>
+              <div class="code"><div class="code-bar"><span class="mono">CHECKLIST.md · 6 / 30</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>- [ ] 1. RP ID is the registrable domain users sign in on
+- [ ] 2. Expected origin lists every production origin explicitly, no wildcards
+- [ ] 6. Challenges are random, single-use and expire within 5 minutes
+- [ ] 14. Signature counter is compared on each login
+- [ ] 18. Users can rename and revoke a passkey
+- [ ] 22. Recovery codes are generated with a CSPRNG and stored hashed</code></pre></div>
+              <p class="dl-row"><a class="btn btn-ghost btn-sm" href="./samples/CHECKLIST.md" download data-i18n="tpl.f4.dl">Download the full CHECKLIST.md (free)</a></p>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>TEST_PLAN.md</code><span class="f-sum" data-i18n="tpl.f5.sum"></span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f5.what"></p>
+              <div class="matrix-wrap">
+                <table class="matrix">
+                  <thead><tr><th data-i18n="tpl.f5.h.env">Environment</th><th data-i18n="tpl.f5.h.reg">Register</th><th data-i18n="tpl.f5.h.login">Sign in</th><th data-i18n="tpl.f5.h.auto">Autofill</th></tr></thead>
+                  <tbody>
+                    <tr><td>Chrome · Windows 11</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Safari · macOS</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Safari · iOS</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Chrome · Android</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Firefox · desktop</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td data-i18n="tpl.f5.cross">Phone as key (QR, cross-device)</td><td>□</td><td>□</td><td>—</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="fine" data-i18n="tpl.f5.note">Empty boxes are for you to tick. The $499 plan includes a filled-in record for your app.</p>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>LICENSE</code><span class="f-sum" data-i18n="tpl.f6.sum"></span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f6.what"></p>
+              <p class="fine"><a class="link" href="#license" data-i18n="tpl.f6.jump">See the can / cannot summary below ↓</a></p>
+            </div>
+          </details>
         </div>
-        <div class="field">
-          <label for="stack" data-i18n="tpl.form.stack">Stack</label>
-          <input id="stack" name="stack" type="text" data-i18n-placeholder="tpl.form.stack.ph" placeholder="Next.js + Supabase">
+      </section>
+
+      <section id="compat" class="tpl-sec">
+        <h2 data-i18n="tpl.compat.title">Compatibility</h2>
+        <p class="sec-lede" data-i18n="tpl.compat.lede"></p>
+        <div class="matrix-wrap">
+          <table class="matrix compat">
+            <thead><tr><th data-i18n="tpl.compat.h.part">Part</th><th data-i18n="tpl.compat.h.ver">Target version</th><th data-i18n="tpl.compat.h.status">Covered by</th></tr></thead>
+            <tbody>
+              <tr><td>Next.js (App Router)</td><td class="mono">14.2+ · 15</td><td data-i18n="tpl.compat.c1">Runnable example</td></tr>
+              <tr><td>Node.js</td><td class="mono">20 LTS+</td><td data-i18n="tpl.compat.c2">Example + CI script</td></tr>
+              <tr><td>@simplewebauthn/server · browser</td><td class="mono">v13</td><td data-i18n="tpl.compat.c1">Runnable example</td></tr>
+              <tr><td>Supabase (Postgres + Auth)</td><td class="mono">supabase-js v2</td><td data-i18n="tpl.compat.c3">Migration SQL + steps</td></tr>
+              <tr><td data-i18n="tpl.compat.jwt">Custom JWT session</td><td class="mono">jose v5</td><td data-i18n="tpl.compat.c4">Notes + snippet</td></tr>
+              <tr><td>Clerk</td><td>—</td><td data-i18n="tpl.compat.c5">Decision notes only</td></tr>
+            </tbody>
+          </table>
         </div>
-        <button type="submit" class="btn btn-primary" data-i18n="tpl.form.submit">即将开通收款</button>
-        <p class="form-note" data-i18n="tpl.form.note"></p>
-        <div class="form-ok" id="form-ok" data-i18n="tpl.form.saved"></div>
-      </form>
-    </section>
+        <p class="fine" data-i18n="tpl.compat.note"></p>
+      </section>
+
+      <section id="license" class="tpl-sec">
+        <h2 data-i18n="tpl.lic.title">License in plain words</h2>
+        <div class="split2">
+          <div class="mini-card can"><h4 data-i18n="tpl.lic.can">You can</h4><ul class="f-list"><li data-i18n="tpl.lic.c1"></li><li data-i18n="tpl.lic.c2"></li><li data-i18n="tpl.lic.c3"></li></ul></div>
+          <div class="mini-card cannot"><h4 data-i18n="tpl.lic.cannot">You cannot</h4><ul class="f-list"><li data-i18n="tpl.lic.n1"></li><li data-i18n="tpl.lic.n2"></li><li data-i18n="tpl.lic.n3"></li></ul></div>
+        </div>
+        <p class="fine" data-i18n="tpl.lic.note"></p>
+      </section>
+
+      <section id="delivery" class="tpl-sec">
+        <h2 data-i18n="tpl.del.title">Delivery and refunds</h2>
+        <div class="split2">
+          <div class="mini-card"><h4 data-i18n="tpl.del.how">How you get it</h4><p data-i18n="tpl.del.how.d"></p></div>
+          <div class="mini-card"><h4 data-i18n="tpl.del.refund">Refunds</h4><p data-i18n="tpl.del.refund.d"></p></div>
+        </div>
+      </section>
+
+      <section id="tpl-faq" class="tpl-sec faq">
+        <h2 data-i18n="nav.faq">FAQ</h2>
+        <details><summary data-i18n="tpl.q1"></summary><p data-i18n="tpl.a1"></p></details>
+        <details><summary data-i18n="tpl.q2"></summary><p data-i18n="tpl.a2"></p></details>
+        <details><summary data-i18n="tpl.q3"></summary><p data-i18n="tpl.a3"></p></details>
+        <details><summary data-i18n="tpl.q4"></summary><p data-i18n="tpl.a4"></p></details>
+        <details><summary data-i18n="faq.1.q"></summary><p data-i18n="faq.1.a"></p></details>
+      </section>
+
+      <section id="changelog" class="tpl-sec">
+        <h2 data-i18n="tpl.nav.changelog">Changelog</h2>
+        <ol class="changelog">
+          <li><time class="mono" datetime="2026-10-14">2026-10-14</time><div><b data-i18n="tpl.cl1.t"></b><p data-i18n="tpl.cl1.d"></p></div></li>
+          <li><time class="mono" datetime="2026-10-12">2026-10-12</time><div><b data-i18n="tpl.cl2.t"></b><p data-i18n="tpl.cl2.d"></p></div></li>
+          <li class="next"><span class="mono" data-i18n="tpl.cl3.when">Next</span><div><b data-i18n="tpl.cl3.t"></b><p data-i18n="tpl.cl3.d"></p></div></li>
+        </ol>
+      </section>
+    </div>
+
+    <aside class="tpl-side">
+      <section class="form-card">
+        <h2 data-i18n="tpl.form.title">Notify / order placeholder</h2>
+        <p class="form-warn" data-i18n="tpl.local.short">Saved only in this browser. Not sent, not an order.</p>
+        <form id="interest-form">
+          <div class="field">
+            <label for="email" data-i18n="tpl.form.email">Work email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
+          </div>
+          <div class="field">
+            <label for="plan" data-i18n="tpl.form.plan">Plan</label>
+            <select id="plan" name="plan">
+              <option value="template" data-i18n="tpl.form.plan.t">Template $49</option>
+              <option value="install" data-i18n="tpl.form.plan.i">Install $299</option>
+              <option value="plus" data-i18n="tpl.form.plan.p">Install + notes $499</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="stack" data-i18n="tpl.form.stack">Stack</label>
+            <input id="stack" name="stack" type="text" data-i18n-placeholder="tpl.form.stack.ph" placeholder="Next.js + Supabase">
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="tpl.form.submit">Save interest</button>
+          <p class="form-note" data-i18n="tpl.form.note"></p>
+          <div class="form-ok" id="form-ok" role="status" data-i18n="tpl.form.saved"></div>
+        </form>
+      </section>
+      <section class="side-card">
+        <h2 data-i18n="tpl.side.title">At a glance</h2>
+        <ul class="glance">
+          <li><span data-i18n="tpl.side.price">Price</span><b>$49</b></li>
+          <li><span data-i18n="tpl.side.files">Top-level items</span><b>6</b></li>
+          <li><span data-i18n="tpl.side.checks">Go-live checks</span><b>30</b></li>
+          <li><span data-i18n="tpl.side.checkout">Checkout</span><b data-i18n="soon">Opening soon</b></li>
+        </ul>
+        <a class="btn btn-ghost btn-sm" href="./samples/CHECKLIST.md" download data-i18n="tpl.f4.dl">Download the full CHECKLIST.md (free)</a>
+      </section>
+    </aside>
   </div>
 </main>
 
 <footer class="footer">
   <div class="wrap footer-inner">
     <span data-i18n="footer.tag"></span>
-    <span data-i18n="pricing.soon"></span>
+    <span data-i18n="footer.soon"></span>
   </div>
 </footer>
 
