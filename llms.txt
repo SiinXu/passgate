@@ -1,0 +1,10 @@
+# PassGate
+> PassGate is a passkey (WebAuthn) implementation kit for SaaS teams that want passwordless sign-in: a $49 template pack or a $299 done-for-you install with a 48-hour delivery window. It is implementation help, not a security audit.
+
+- Home: https://passgate.incidental.site/
+- Template pack: https://passgate.incidental.site/template
+- Checklist sample: https://passgate.incidental.site/samples/CHECKLIST.md
+- Languages: en (default), zh-CN, zh-TW, ja, ko, ms, vi, fr, es, de — append ?lang=<code>
+- Full text: https://passgate.incidental.site/llms-full.txt
+- Sitemap: https://passgate.incidental.site/sitemap.xml
+- Publisher: Incidental AI (https://incidental.site/)

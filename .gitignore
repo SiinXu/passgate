@@ -9,3 +9,4 @@ __pycache__/
 tools/zh-TW.raw.json
 audit/before/
 audit/after/
+deploy-v*.js

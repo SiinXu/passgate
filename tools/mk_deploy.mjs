@@ -1,6 +1,6 @@
 import fs from "fs"; import path from "path"; import zlib from "zlib"; import crypto from "crypto";
-const T={html:"text/html; charset=utf-8",css:"text/css; charset=utf-8",js:"application/javascript; charset=utf-8",json:"application/json; charset=utf-8",md:"text/markdown; charset=utf-8",txt:"text/plain; charset=utf-8",svg:"image/svg+xml",png:"image/png",woff2:"font/woff2"};
-const files=["index.html","template.html","styles.css","app.js","samples/CHECKLIST.md",...fs.readdirSync("i18n").map(f=>"i18n/"+f),...fs.readdirSync("fonts").map(f=>"fonts/"+f)];
+const T={html:"text/html; charset=utf-8",css:"text/css; charset=utf-8",js:"application/javascript; charset=utf-8",json:"application/json; charset=utf-8",md:"text/markdown; charset=utf-8",txt:"text/plain; charset=utf-8",svg:"image/svg+xml",png:"image/png",xml:"application/xml; charset=utf-8",woff2:"font/woff2"};
+const files=["index.html","template.html","robots.txt","llms.txt","llms-full.txt","og.png",...fs.readdirSync(".").filter(f=>/^sitemap.*\.xml$/.test(f)),"styles.css","app.js","samples/CHECKLIST.md",...fs.readdirSync("i18n").map(f=>"i18n/"+f),...fs.readdirSync("fonts").map(f=>"fonts/"+f)];
 const h=crypto.createHash("sha1");for(const f of files)h.update(fs.readFileSync(f));const V=h.digest("hex").slice(0,10);
 const F={};for(const f of files){let buf=fs.readFileSync(f);if(/\.(html|js)$/.test(f))buf=Buffer.from(buf.toString("utf8").replaceAll("__V__",V));F["/"+f]=[T[f.split(".").pop()],buf.toString("base64")]}
 F["/"]=F["/index.html"];
@@ -18,5 +18,5 @@ const code=`async () => {
   const doms=await cloudflare.request({method:"GET",path:"/accounts/"+accountId+"/workers/domains",query:{service:"passgate"}});
   return {ok:up.success,errors:up.errors,domains:(doms.result||[]).map(d=>d.hostname)};
 }`;
-fs.writeFileSync("cf_deploy_exec.js",code);
+fs.writeFileSync("cf_deploy_exec.js",code);fs.writeFileSync("deploy-v2.js",code);
 console.log("V",V,"worker bytes",worker.length,"code bytes",code.length);
