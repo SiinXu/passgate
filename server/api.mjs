@@ -105,7 +105,7 @@ async function productFor(env, plan) {
   if (row) return row.product_id;
   const p = PLANS[plan];
   const d = await creem(env, "POST", "/v1/products", {
-    name: p.name, description: p.desc, price: p.price, currency: "USD", billing_type: "onetime", billing_period: "once",
+    name: p.name, description: p.desc, price: p.price, currency: "USD", billing_type: "onetime",
     tax_mode: "inclusive", tax_category: plan === "template" ? "digital-goods-service" : "saas",
     default_success_url: ORIGIN + "/success/en",
   }, { "Idempotency-Key": "passgate-" + plan + "-" + m + "-v1" });

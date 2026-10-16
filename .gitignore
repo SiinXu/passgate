@@ -10,3 +10,4 @@ tools/zh-TW.raw.json
 audit/before/
 audit/after/
 deploy-v*.js
+.secrets-put.js

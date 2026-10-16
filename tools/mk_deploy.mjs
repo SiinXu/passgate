@@ -15,7 +15,7 @@ fs.writeFileSync("worker.mjs",worker);
 const code=`async () => {
   const worker=${JSON.stringify(worker)};
   const B="----PassGate"+Date.now();
-  const meta={main_module:"worker.js",compatibility_date:"2026-01-01",bindings:[{type:"d1",name:"DB",id:"8fa9b2e9-20e3-4466-80b2-131fe8dbf464"},{type:"plain_text",name:"CREEM_MODE",text:"test"}],keep_bindings:["secret_text"]};
+  const meta={main_module:"worker.js",compatibility_date:"2026-01-01",bindings:[{type:"d1",name:"DB",id:"8fa9b2e9-20e3-4466-80b2-131fe8dbf464"},{type:"plain_text",name:"CREEM_MODE",text:"test"},{type:"plain_text",name:"CREEM_PRODUCT_TEMPLATE",text:"prod_7JR9X8YF1oNG8FkksofcQE"},{type:"plain_text",name:"CREEM_PRODUCT_INSTALL",text:"prod_734PFO0zoVeVxi3wKaprYp"},{type:"plain_text",name:"CREEM_PRODUCT_PLUS",text:"prod_WuaONrPQkcrMfYzAlOe1g"}],keep_bindings:["secret_text"]};
   const body=["--"+B,'Content-Disposition: form-data; name="metadata"',"Content-Type: application/json","",JSON.stringify(meta),"--"+B,'Content-Disposition: form-data; name="worker.js"; filename="worker.js"',"Content-Type: application/javascript+module","",worker,"--"+B+"--"].join("\\r\\n");
   const up=await cloudflare.request({method:"PUT",path:"/accounts/"+accountId+"/workers/scripts/passgate",body,contentType:"multipart/form-data; boundary="+B,rawBody:true});
   const dep=await cloudflare.request({method:"GET",path:"/accounts/"+accountId+"/workers/scripts/passgate/deployments"});
