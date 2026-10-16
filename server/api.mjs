@@ -40,6 +40,14 @@ function checkTiming(t) {
   if (now - n < MIN_FILL_MS) return "too_fast";
   return null;
 }
+// Client-declared internal traffic (?internal=1 → localStorage ievt_internal, same flag events.js uses) and webdriver.
+function flags(b, extra) {
+  const r = [];
+  if (extra) r.push(extra);
+  if (b && (b.internal === 1 || b.internal === "1" || b.internal === true)) r.push("internal_flag");
+  if (b && (b.wd === 1 || b.wd === "1" || b.wd === true)) r.push("webdriver");
+  return { internal: r.length ? 1 : 0, irule: r.join(",") };
+}
 let SCHEMA = false;
 async function schema(env) {
   if (SCHEMA) return;
@@ -54,6 +62,8 @@ async function schema(env) {
     env.DB.prepare("CREATE INDEX IF NOT EXISTS pg_purchases_checkout ON pg_purchases(checkout_id)"),
     env.DB.prepare("CREATE TABLE IF NOT EXISTS pg_webhooks (id TEXT PRIMARY KEY, type TEXT, ts INTEGER, mode TEXT, ok INTEGER, note TEXT)"),
   ]);
+  // internal flag, same semantics as ev: internal 0/1, irule "" when external, comma list of matched rules otherwise.
+  for (const t of ["pg_interest", "pg_checkouts", "pg_purchases"]) for (const c of ["internal INTEGER DEFAULT 0", "irule TEXT DEFAULT ''"]) { try { await env.DB.prepare("ALTER TABLE " + t + " ADD COLUMN " + c).run(); } catch (e) {} }
   SCHEMA = true;
 }
 
@@ -74,8 +84,9 @@ async function interest(req, env) {
   if (ip && ip.n >= 5) return J({ ok: false, code: "rate_limited" }, 429, { "retry-after": "600" });
   const dup = await env.DB.prepare("SELECT id FROM pg_interest WHERE email=? AND plan=? AND ts>?").bind(email, plan, now - WIN).first();
   if (dup) return J({ ok: true, dup: true });
-  await env.DB.prepare("INSERT INTO pg_interest (ts,email,plan,stack,lang,iph,country,ua) VALUES (?,?,?,?,?,?,?,?)")
-    .bind(now, email, plan, stack, lang, iph, (req.cf && req.cf.country) || "", uaFamily(req.headers.get("User-Agent"))).run();
+  const f = flags(b, uaFamily(req.headers.get("User-Agent")) === "bot" ? "bot_ua" : "");
+  await env.DB.prepare("INSERT INTO pg_interest (ts,email,plan,stack,lang,iph,country,ua,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?)")
+    .bind(now, email, plan, stack, lang, iph, (req.cf && req.cf.country) || "", uaFamily(req.headers.get("User-Agent")), f.internal, f.irule).run();
   return J({ ok: true });
 }
 
@@ -124,12 +135,13 @@ async function checkout(req, env) {
   try {
     const product_id = await productFor(env, plan);
     const request_id = "pg_" + crypto.randomUUID();
-    const body = { product_id, request_id, success_url: ORIGIN + "/success/" + lang, metadata: { plan, lang, site: "passgate" } };
+    const f = flags(b, mode(env) === "live" ? "" : "creem_test");
+    const body = { product_id, request_id, success_url: ORIGIN + "/success/" + lang, metadata: { plan, lang, site: "passgate", internal: f.irule.includes("internal_flag") || f.irule.includes("webdriver") ? "1" : "0" } };
     if (EMAIL_RE.test(email)) body.customer = { email };
     const d = await creem(env, "POST", "/v1/checkouts", body);
     if (!d || !d.checkout_url) throw new Error("creem checkout: no url");
-    await env.DB.prepare("INSERT OR IGNORE INTO pg_checkouts (id,ts,plan,lang,mode,request_id,iph,country) VALUES (?,?,?,?,?,?,?,?)")
-      .bind(S(d.id, 80) || request_id, now, plan, lang, mode(env), request_id, iph, (req.cf && req.cf.country) || "").run();
+    await env.DB.prepare("INSERT OR IGNORE INTO pg_checkouts (id,ts,plan,lang,mode,request_id,iph,country,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?)")
+      .bind(S(d.id, 80) || request_id, now, plan, lang, mode(env), request_id, iph, (req.cf && req.cf.country) || "", f.internal, f.irule).run();
     return J({ ok: true, url: d.checkout_url, mode: mode(env) });
   } catch (e) {
     console.error("checkout", String(e && e.message || e));
@@ -187,13 +199,15 @@ async function handleEvent(env, type, o, now, m) {
     const plan = PLANS[md.plan] ? md.plan : Object.keys(PLANS).find((k) => PLANS[k].price === product.price) || "unknown";
     const lang = LANGS.has(md.lang) ? md.lang : "";
     const orderId = S(order.id, 80) || S(o.id, 80);
-    const ins = await env.DB.prepare("INSERT OR IGNORE INTO pg_purchases (order_id,checkout_id,product_id,plan,amount,currency,email,customer_id,mode,status,lang,ts,updated) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")
-      .bind(orderId, S(o.id, 80), S(product.id || order.product, 80), plan, Number(order.amount_paid ?? order.amount) || 0, S(order.currency, 8), S(cust.email, 254).toLowerCase(), S(cust.id || order.customer, 80), S(o.mode, 16) || m, "paid", lang, now, now).run();
+    const test = m !== "live" || /test|sandbox|local/i.test(String(o.mode || ""));
+    const rules = [test ? "creem_test" : "", md.internal === "1" ? "internal_flag" : ""].filter(Boolean);
+    const internal = rules.length ? 1 : 0, irule = rules.join(",");
+    const ins = await env.DB.prepare("INSERT OR IGNORE INTO pg_purchases (order_id,checkout_id,product_id,plan,amount,currency,email,customer_id,mode,status,lang,ts,updated,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+      .bind(orderId, S(o.id, 80), S(product.id || order.product, 80), plan, Number(order.amount_paid ?? order.amount) || 0, S(order.currency, 8), S(cust.email, 254).toLowerCase(), S(cust.id || order.customer, 80), S(o.mode, 16) || m, "paid", lang, now, now, internal, irule).run();
     if (ins.meta && ins.meta.changes > 0) {
-      const test = m !== "live" || /test|sandbox|local/i.test(String(o.mode || ""));
       const props = JSON.stringify({ goal: "purchase", plan, amount: Number(order.amount_paid ?? order.amount) || 0, currency: S(order.currency, 8), mode: test ? "test" : "live", source: "creem_webhook" });
       await env.DB.prepare("INSERT INTO ev (ts,day,site,event,path,lang,props,country,ua,ref,src,med,camp,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
-        .bind(now, day(now), "passgate", "convert", "/api/creem/webhook", lang, props, S(cust.country, 4), "server", "creem.io", "", "", "", test ? 1 : 0, test ? "creem_test" : null).run();
+        .bind(now, day(now), "passgate", "convert", "/api/creem/webhook", lang, props, S(cust.country, 4), "server", "creem.io", "", "", "", internal, irule).run();
       return { note: "recorded" };
     }
     return { note: "already recorded" };

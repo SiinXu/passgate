@@ -9,7 +9,9 @@
   let current = "en";
   const T0 = Date.now(); // anti-bot: page-load timestamp, sent with forms (server rejects fills under 2.5s)
   const CO = { enabled: false, mode: "test", ready: null };
-  const ERR = { invalid_email: "err.invalid_email", invalid_plan: "err.invalid_plan", too_fast: "err.too_fast", rate_limited: "err.rate_limited", stale: "err.stale", network: "err.network" };
+  const ERR = { invalid_email: "err.invalid_email", required: "err.invalid_email", invalid_plan: "err.invalid_plan", too_fast: "err.too_fast", rate_limited: "err.rate_limited", stale: "err.stale", network: "err.network" };
+  const ev = (name, props) => { try { window.ievt && window.ievt(name, props); } catch (_) {} };
+  const intFlags = () => { let i = 0; try { const q = new URLSearchParams(location.search).get("internal"); i = q === "1" || (q !== "0" && localStorage.getItem("ievt_internal") === "1") ? 1 : 0; } catch (_) {} let wd = 0; try { wd = navigator.webdriver ? 1 : 0; } catch (_) {} return { internal: i, wd }; };
   const errText = (code) => tr(ERR[code] || "err.server", "Something went wrong. Please try again in a minute.");
   async function postJSON(url, body) {
     let r;
@@ -139,7 +141,7 @@
       if (btn.getAttribute("aria-busy") === "true") return;
       const label = btn.textContent;
       btn.setAttribute("aria-busy", "true"); btn.textContent = tr("co.opening", "Opening secure checkout…");
-      const d = await postJSON("/api/checkout", { plan: btn.dataset.plan || "template", lang: current, t: T0 });
+      const d = await postJSON("/api/checkout", { plan: btn.dataset.plan || "template", lang: current, t: T0, ...intFlags() });
       if (d.ok && d.url && /^https:\/\/([a-z0-9-]+\.)*creem\.io\//.test(d.url)) { location.assign(d.url); return; }
       btn.removeAttribute("aria-busy"); btn.textContent = label;
       if (d.code === "checkout_disabled") { CO.enabled = false; open(); return; }
@@ -162,6 +164,7 @@
     CO.ready = fetch("/api/checkout/status", { credentials: "same-origin" }).then((r) => r.json()).then((d) => {
       CO.enabled = !!(d && d.enabled); CO.mode = (d && d.mode) || "test";
       if (!CO.enabled) return;
+      document.querySelectorAll("[data-checkout]").forEach((b) => b.removeAttribute("data-evt-closed"));
       const swap = { "hero.note": "live.note", "soon": "live.soon", "footer.soon": "live.footer" };
       document.querySelectorAll("[data-i18n]").forEach((el) => { const k = el.getAttribute("data-i18n"); if (swap[k]) el.setAttribute("data-i18n", swap[k]); });
       if (CO.mode !== "live") document.querySelectorAll('[data-i18n="live.note"]').forEach((el) => {
@@ -178,7 +181,8 @@
     const err = document.getElementById("form-err");
     const ok = document.getElementById("form-ok");
     const btn = form.querySelector('button[type="submit"]');
-    const showErr = (code) => { if (!err) return; err.textContent = errText(code); err.hidden = false; ok?.classList.remove("show"); };
+    const showErr = (code, field) => { ev("form_error", { form: "interest", field: field || "", reason: code }); showMsg(code); };
+    const showMsg = (code) => { if (!err) return; err.textContent = errText(code); err.hidden = false; ok?.classList.remove("show"); };
     const EMAIL = /^[^\s@<>()"',;:]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -186,14 +190,14 @@
       if (err) err.hidden = true;
       const data = Object.fromEntries(new FormData(form).entries());
       const email = String(data.email || "").trim();
-      if (!EMAIL.test(email)) { showErr("invalid_email"); form.querySelector("#email")?.focus(); return; }
+      if (!EMAIL.test(email)) { showErr(email ? "invalid_email" : "required", "email"); form.querySelector("#email")?.focus(); return; }
       const label = btn ? btn.textContent : "";
       if (btn) { btn.setAttribute("aria-busy", "true"); btn.textContent = tr("form.sending", "Sending…"); }
-      const d = await postJSON("/api/interest", { email, plan: data.plan, stack: data.stack || "", website: data.website || "", lang: current, t: T0 });
+      const d = await postJSON("/api/interest", { email, plan: data.plan, stack: data.stack || "", website: data.website || "", lang: current, t: T0, ...intFlags() });
       if (btn) { btn.removeAttribute("aria-busy"); btn.textContent = label; }
-      if (!d.ok) { showErr(d.code || "server"); return; }
+      if (!d.ok) { showErr(d.code || "server", d.code === "invalid_email" ? "email" : d.code === "invalid_plan" ? "plan" : ""); return; }
       ok?.classList.add("show");
-      try { window.ievt && window.ievt("subscribe", { source: "interest", plan: data.plan }); } catch (_) {}
+      ev("subscribe", { source: "interest", plan: data.plan });
       form.reset();
     });
   }
