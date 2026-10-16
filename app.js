@@ -151,6 +151,9 @@
       btn.addEventListener("click", async (e) => {
         e.preventDefault();
         if (CO.ready) await CO.ready;
+        // Tracking (fired here, not via data-evt, so convert{goal:checkout} carries the plan): one checkout_click + one convert per click.
+        const plan = btn.dataset.plan || "template", p = CO.enabled ? { plan } : { plan, closed: "true" };
+        ev("checkout_click", p); ev("convert", { goal: "checkout", ...p });
         if (CO.enabled) start(btn); else open();
       });
     });
@@ -164,7 +167,6 @@
     CO.ready = fetch("/api/checkout/status", { credentials: "same-origin" }).then((r) => r.json()).then((d) => {
       CO.enabled = !!(d && d.enabled); CO.mode = (d && d.mode) || "test";
       if (!CO.enabled) return;
-      document.querySelectorAll("[data-checkout]").forEach((b) => b.removeAttribute("data-evt-closed"));
       const swap = { "hero.note": "live.note", "soon": "live.soon", "footer.soon": "live.footer" };
       document.querySelectorAll("[data-i18n]").forEach((el) => { const k = el.getAttribute("data-i18n"); if (swap[k]) el.setAttribute("data-i18n", swap[k]); });
       if (CO.mode !== "live") document.querySelectorAll('[data-i18n="live.note"]').forEach((el) => {
