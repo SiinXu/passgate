@@ -7,6 +7,17 @@
   const dict = {};
   const V = "__V__";
   let current = "en";
+  const T0 = Date.now(); // anti-bot: page-load timestamp, sent with forms (server rejects fills under 2.5s)
+  const CO = { enabled: false, mode: "test", ready: null };
+  const ERR = { invalid_email: "err.invalid_email", invalid_plan: "err.invalid_plan", too_fast: "err.too_fast", rate_limited: "err.rate_limited", stale: "err.stale", network: "err.network" };
+  const errText = (code) => tr(ERR[code] || "err.server", "Something went wrong. Please try again in a minute.");
+  async function postJSON(url, body) {
+    let r;
+    try { r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body), credentials: "same-origin" }); }
+    catch (_) { return { ok: false, code: "network" }; }
+    let d = null; try { d = await r.json(); } catch (_) {}
+    return d && typeof d === "object" ? d : { ok: false, code: r.ok ? "server" : "server" };
+  }
 
   function fromTag(tag) {
     const low = String(tag || "").toLowerCase();
@@ -55,7 +66,7 @@
 
   async function loadDict(lang) {
     if (dict[lang]) return dict[lang];
-    const res = await fetch(`./i18n/${lang}.json?v=${V}`);
+    const res = await fetch(`/i18n/${lang}.json?v=${V}`);
     dict[lang] = await res.json();
     return dict[lang];
   }
@@ -105,32 +116,109 @@
 
   function wireModal() {
     const modal = document.getElementById("checkout-modal");
-    if (!modal) return;
+    const title = document.getElementById("modal-title");
+    const msg = document.getElementById("modal-msg");
+    const body = modal ? modal.querySelector('[data-i18n="modal.body"]') : null;
     let last = null;
-    const open = () => { last = document.activeElement; modal.hidden = false; document.getElementById("modal-close")?.focus(); };
-    const close = () => { modal.hidden = true; last?.focus?.(); };
+    const open = (errCode) => {
+      if (!modal) return;
+      last = document.activeElement;
+      if (errCode) {
+        if (title) title.textContent = tr("co.error", "Checkout could not open.");
+        if (body) body.hidden = true;
+        if (msg) { msg.textContent = errCode === "checkout_error" ? tr("err.server", "") : errText(errCode); msg.hidden = false; }
+      } else {
+        if (title) title.textContent = tr("modal.title", "Checkout coming soon");
+        if (body) body.hidden = false;
+        if (msg) msg.hidden = true;
+      }
+      modal.hidden = false; document.getElementById("modal-close")?.focus();
+    };
+    const close = () => { if (modal) modal.hidden = true; last?.focus?.(); };
+    async function start(btn) {
+      if (btn.getAttribute("aria-busy") === "true") return;
+      const label = btn.textContent;
+      btn.setAttribute("aria-busy", "true"); btn.textContent = tr("co.opening", "Opening secure checkout…");
+      const d = await postJSON("/api/checkout", { plan: btn.dataset.plan || "template", lang: current, t: T0 });
+      if (d.ok && d.url && /^https:\/\/([a-z0-9-]+\.)*creem\.io\//.test(d.url)) { location.assign(d.url); return; }
+      btn.removeAttribute("aria-busy"); btn.textContent = label;
+      if (d.code === "checkout_disabled") { CO.enabled = false; open(); return; }
+      open(d.code || "server");
+    }
     document.querySelectorAll("[data-checkout]").forEach((btn) => {
-      btn.addEventListener("click", (e) => { e.preventDefault(); open(); });
+      btn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        if (CO.ready) await CO.ready;
+        if (CO.enabled) start(btn); else open();
+      });
     });
+    if (!modal) return;
     modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
     document.getElementById("modal-close")?.addEventListener("click", close);
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) close(); });
   }
 
+  function loadCheckoutStatus() {
+    CO.ready = fetch("/api/checkout/status", { credentials: "same-origin" }).then((r) => r.json()).then((d) => {
+      CO.enabled = !!(d && d.enabled); CO.mode = (d && d.mode) || "test";
+      if (!CO.enabled) return;
+      const swap = { "hero.note": "live.note", "soon": "live.soon", "footer.soon": "live.footer" };
+      document.querySelectorAll("[data-i18n]").forEach((el) => { const k = el.getAttribute("data-i18n"); if (swap[k]) el.setAttribute("data-i18n", swap[k]); });
+      if (CO.mode !== "live") document.querySelectorAll('[data-i18n="live.note"]').forEach((el) => {
+        const t = document.createElement(el.tagName === "P" ? "p" : "span"); t.className = el.className + " co-test"; t.setAttribute("data-i18n", "co.test"); el.after(t);
+      });
+      return setLang(current, false);
+    }).catch(() => {});
+  }
+
   function wireForm() {
     const form = document.getElementById("interest-form");
     if (!form) return;
-    form.addEventListener("submit", (e) => {
+    form.setAttribute("novalidate", "");
+    const err = document.getElementById("form-err");
+    const ok = document.getElementById("form-ok");
+    const btn = form.querySelector('button[type="submit"]');
+    const showErr = (code) => { if (!err) return; err.textContent = errText(code); err.hidden = false; ok?.classList.remove("show"); };
+    const EMAIL = /^[^\s@<>()"',;:]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (btn?.getAttribute("aria-busy") === "true") return;
+      if (err) err.hidden = true;
       const data = Object.fromEntries(new FormData(form).entries());
-      try {
-        const prev = JSON.parse(localStorage.getItem("passgate-interest") || "[]");
-        prev.push({ ...data, at: new Date().toISOString() });
-        localStorage.setItem("passgate-interest", JSON.stringify(prev));
-      } catch (_) {}
-      document.getElementById("form-ok")?.classList.add("show");
+      const email = String(data.email || "").trim();
+      if (!EMAIL.test(email)) { showErr("invalid_email"); form.querySelector("#email")?.focus(); return; }
+      const label = btn ? btn.textContent : "";
+      if (btn) { btn.setAttribute("aria-busy", "true"); btn.textContent = tr("form.sending", "Sending…"); }
+      const d = await postJSON("/api/interest", { email, plan: data.plan, stack: data.stack || "", website: data.website || "", lang: current, t: T0 });
+      if (btn) { btn.removeAttribute("aria-busy"); btn.textContent = label; }
+      if (!d.ok) { showErr(d.code || "server"); return; }
+      ok?.classList.add("show");
+      try { window.ievt && window.ievt("subscribe", { source: "interest", plan: data.plan }); } catch (_) {}
       form.reset();
     });
+  }
+
+  async function wireSuccess() {
+    const card = document.querySelector("[data-ok]");
+    if (!card) return;
+    const q = (a) => card.querySelector(a);
+    let d = null;
+    try { d = await (await fetch("/api/checkout/verify" + location.search, { credentials: "same-origin" })).json(); } catch (_) {}
+    const okv = !!(d && d.verified);
+    card.dataset.state = okv ? "ok" : "unverified";
+    const title = q("[data-ok-title]"), body = q("[data-ok-body]");
+    title.setAttribute("data-i18n", okv ? "ok.title" : "ok.unverified");
+    if (!okv) { title.style.fontSize = "1.25rem"; }
+    body.hidden = !okv;
+    if (okv) {
+      const p = new URLSearchParams(location.search);
+      const planKey = { template: "tpl.form.plan.t", install: "tpl.form.plan.i", plus: "tpl.form.plan.p" }[d.plan];
+      const pe = q("[data-ok-plan]"); if (planKey) pe.setAttribute("data-i18n", planKey); else pe.textContent = "—";
+      q("[data-ok-ref]").textContent = p.get("order_id") || p.get("checkout_id") || "—";
+      q("[data-ok-meta]").hidden = false;
+      q("[data-ok-test]").hidden = d.mode === "live";
+    }
+    await setLang(current, false);
   }
 
   function wireCopy() {
@@ -208,8 +296,10 @@
     document.getElementById("theme-toggle")?.addEventListener("click", () => {
       setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
     });
+    loadCheckoutStatus();
     wireModal();
     wireForm();
+    wireSuccess();
     wireCopy();
     wireDemo();
     wireSpecimen();

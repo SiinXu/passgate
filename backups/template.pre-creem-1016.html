@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="PassGate template pack — Next.js WebAuthn example, Supabase migration, Clerk decision notes, 30-item CHECKLIST, browser TEST_PLAN, commercial license.">
+<title data-i18n-title="tpl.title">Template pack · PassGate</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Ccircle cx='12' cy='16' r='4' fill='none' stroke='%2334d399' stroke-width='2'/%3E%3Cpath d='M16 16h10m-3-3v6' fill='none' stroke='%2334d399' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preload" href="./fonts/SpaceGrotesk-latin-ecea81.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fonts/IBMPlexSans-latin-a68a20.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="./styles.css?v=__V__">
+<script>
+(function(){var d=document.documentElement,S=["zh-CN","zh-TW","en","ja","ko","ms","vi","fr","es","de"],l=null,i;
+try{var t=localStorage.getItem("passgate-theme");d.dataset.theme=t||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark")}catch(e){}
+l=new URLSearchParams(location.search).get("lang");if(S.indexOf(l)<0){l=null;try{l=localStorage.getItem("passgate-lang")}catch(e){}if(S.indexOf(l)<0)l=null}
+if(!l){var n=(navigator.languages||[]).concat(navigator.language||"");for(i=0;i<n.length&&!l;i++){var x=String(n[i]).toLowerCase(),b=x.split("-")[0];
+if(b==="zh")l=/hant|tw|hk|mo/.test(x)?"zh-TW":"zh-CN";else if(S.indexOf(b)>=0)l=b}}
+if(!l){var z="";try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+var R=[[/Taipei|Hong_Kong|Macau/,"zh-TW"],[/Shanghai|Chongqing|Harbin|Urumqi/,"zh-CN"],[/Tokyo/,"ja"],[/Seoul/,"ko"],[/Kuala_Lumpur|Kuching/,"ms"],[/Ho_Chi_Minh|Saigon/,"vi"],[/Paris/,"fr"],[/Madrid|Mexico_City|Bogota|Buenos_Aires|Lima|Santiago/,"es"],[/Berlin|Vienna|Zurich/,"de"]];
+for(i=0;i<R.length&&!l;i++)if(R[i][0].test(z))l=R[i][1]}
+l=l||"en";window.__pgLang=l;d.lang=l;
+if(l!=="en"){d.classList.add("i18n-wait");setTimeout(function(){d.classList.remove("i18n-wait")},1500);
+var p=document.createElement("link");p.rel="preload";p.as="fetch";p.crossOrigin="anonymous";p.href="./i18n/"+l+".json?v=__V__";document.head.appendChild(p)}})();
+</script>
+<!--IA--><link rel="canonical" href="https://passgate.incidental.site/template"><link rel="alternate" hreflang="zh-CN" href="https://passgate.incidental.site/template?lang=zh-CN"><link rel="alternate" hreflang="zh-TW" href="https://passgate.incidental.site/template?lang=zh-TW"><link rel="alternate" hreflang="en" href="https://passgate.incidental.site/template?lang=en"><link rel="alternate" hreflang="ja" href="https://passgate.incidental.site/template?lang=ja"><link rel="alternate" hreflang="ko" href="https://passgate.incidental.site/template?lang=ko"><link rel="alternate" hreflang="ms" href="https://passgate.incidental.site/template?lang=ms"><link rel="alternate" hreflang="vi" href="https://passgate.incidental.site/template?lang=vi"><link rel="alternate" hreflang="fr" href="https://passgate.incidental.site/template?lang=fr"><link rel="alternate" hreflang="es" href="https://passgate.incidental.site/template?lang=es"><link rel="alternate" hreflang="de" href="https://passgate.incidental.site/template?lang=de"><link rel="alternate" hreflang="x-default" href="https://passgate.incidental.site/template"><meta property="og:type" content="website"><meta property="og:site_name" content="PassGate"><meta property="og:title" content="Passkey template pack · PassGate"><meta property="og:description" content="Passkey (WebAuthn) template pack: checklist, test plan, Next.js example and Supabase steps. $49."><meta property="og:url" content="https://passgate.incidental.site/template"><meta property="og:image" content="https://passgate.incidental.site/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Passkey template pack · PassGate"><meta name="twitter:description" content="Passkey (WebAuthn) template pack: checklist, test plan, Next.js example and Supabase steps. $49."><meta name="twitter:image" content="https://passgate.incidental.site/og.png"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://incidental.site/#org", "name": "Incidental AI", "alternateName": "偶然 AI", "url": "https://incidental.site/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "PassGate", "item": "https://passgate.incidental.site/"}, {"@type": "ListItem", "position": 2, "name": "Passkey template pack", "item": "https://passgate.incidental.site/template"}]}, {"@type": "SoftwareApplication", "name": "PassGate passkey template pack", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "url": "https://passgate.incidental.site/template", "offers": {"@type": "Offer", "name": "Template pack", "price": "49", "priceCurrency": "USD"}, "publisher": {"@id": "https://incidental.site/#org"}}]}</script><style id="ia-growth">.geo-intro{max-width:1120px;margin:12px auto 0;padding:0 24px;font-size:12.5px;line-height:1.55;opacity:.7}.geo-intro{display:grid}.geo-intro [data-gl]{grid-area:1/1;visibility:hidden}html[lang="en"] .geo-intro [data-gl="en"],html[lang="zh-CN"] .geo-intro [data-gl="zh-CN"],html[lang="zh-TW"] .geo-intro [data-gl="zh-TW"],html[lang="ja"] .geo-intro [data-gl="ja"],html[lang="ko"] .geo-intro [data-gl="ko"],html[lang="ms"] .geo-intro [data-gl="ms"],html[lang="vi"] .geo-intro [data-gl="vi"],html[lang="fr"] .geo-intro [data-gl="fr"],html[lang="es"] .geo-intro [data-gl="es"],html[lang="de"] .geo-intro [data-gl="de"]{visibility:visible}html:not([lang]) .geo-intro [data-gl="en"]{visibility:visible}.sub-band{max-width:1120px;margin:8px auto 32px;padding:0 24px;--ie-acc:var(--accent,#34d399);--ie-acc-ink:var(--accent-ink)}.ie-sub{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;padding:18px 20px;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:14px;background:color-mix(in srgb,currentColor 4%,transparent);margin:28px 0}.ie-sub-copy{flex:1 1 220px;min-width:0}.ie-sub-t{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em}.ie-sub-d{margin:4px 0 0;font-size:13px;opacity:.72;line-height:1.45}.ie-sub-row{display:flex;gap:8px;flex:1 1 260px;min-width:0}.ie-sub-row input[type=email]:focus-visible{outline:2px solid var(--ie-acc,#4f46e5);outline-offset:1px}.ie-sub-row input[type=email]{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid color-mix(in srgb,currentColor 18%,transparent);background:transparent;color:inherit;font:inherit}.ie-sub-row button{padding:10px 16px;border-radius:10px;border:0;background:var(--ie-acc,#4f46e5);color:var(--ie-acc-ink,#fff);font:inherit;font-weight:600;font-size:13px;line-height:1;cursor:pointer;white-space:nowrap}.ie-sub-msg{flex:1 1 100%;margin:0;font-size:13px;opacity:.85}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media (max-width:560px){.ie-sub-row{flex-direction:column}.ie-sub-row button{width:100%}}</style><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c199a50511f14c24aec30ae51fb80273"}'></script><script defer src="https://stats.incidental.site/events.js" data-site="passgate"></script><script defer src="https://stats.incidental.site/subscribe.js"></script><!--/IA--></head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="./">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="12" r="3.2"/><path d="M11 12h9m-3-3v6"/></svg></span>
+      <span data-i18n="brand">PassGate</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#files" data-i18n="tpl.nav.files">Files</a>
+      <a href="#compat" data-i18n="tpl.nav.compat">Compatibility</a>
+      <a href="#license" data-i18n="tpl.nav.license">License</a>
+      <a href="#tpl-faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#changelog" data-i18n="tpl.nav.changelog">Changelog</a>
+      <a href="./#pricing" data-i18n="nav.pricing">Pricing</a>
+    </nav>
+    <div class="nav-tools">
+      <label class="visually-hidden" for="lang-select" data-i18n="lang.label">Language</label>
+      <select id="lang-select" class="chip" aria-label="Language"></select>
+      <button type="button" class="chip" id="theme-toggle" data-i18n-aria="theme.toggle" aria-label="Theme">◐</button>
+      <button type="button" class="btn btn-primary" data-checkout data-evt="checkout_click" data-i18n="nav.buy">Buy template</button>
+    </div>
+  </div>
+</header><!--IA--><p class="geo-intro"><span data-gl="en" lang="en">PassGate is a passkey (WebAuthn) implementation kit for SaaS teams that want passwordless sign-in: a $49 template pack or a $299 done-for-you install with a 48-hour delivery window. It is implementation help, not a security audit.</span><span data-gl="zh-CN" lang="zh-CN">PassGate 是给想上无密码登录的 SaaS 团队用的通行密钥（WebAuthn）落地套件：$49 模板包，或 $299 代装服务（48 小时交付窗口）。它是实施帮助，不是安全审计。</span><span data-gl="zh-TW" lang="zh-TW">PassGate 是給想導入無密碼登入的 SaaS 團隊用的通行金鑰（WebAuthn）落地套件：$49 範本包，或 $299 代裝服務（48 小時交付窗口）。它是實作協助，不是安全稽核。</span><span data-gl="ja" lang="ja">PassGate は、パスワードレス認証を導入したい SaaS チーム向けのパスキー（WebAuthn）実装キットです。$49 のテンプレートパック、または 48 時間で納品する $299 の導入代行。セキュリティ監査ではなく実装支援です。</span><span data-gl="ko" lang="ko">PassGate는 비밀번호 없는 로그인을 도입하려는 SaaS 팀을 위한 패스키(WebAuthn) 구현 키트입니다. $49 템플릿 팩 또는 48시간 내 납품하는 $299 설치 대행. 보안 감사가 아닌 구현 지원입니다.</span><span data-gl="ms" lang="ms">PassGate ialah kit pelaksanaan passkey (WebAuthn) untuk pasukan SaaS yang mahu log masuk tanpa kata laluan: pek templat $49 atau pemasangan siap $299 dalam tempoh 48 jam. Ia bantuan pelaksanaan, bukan audit keselamatan.</span><span data-gl="vi" lang="vi">PassGate là bộ triển khai passkey (WebAuthn) cho đội SaaS muốn đăng nhập không mật khẩu: gói mẫu $49 hoặc dịch vụ cài đặt trọn gói $299 trong 48 giờ. Đây là hỗ trợ triển khai, không phải kiểm toán bảo mật.</span><span data-gl="fr" lang="fr">PassGate est un kit d’implémentation de passkeys (WebAuthn) pour les équipes SaaS qui veulent une connexion sans mot de passe : un pack de modèles à 49 $ ou une installation clé en main à 299 $ livrée en 48 heures. C’est une aide à l’implémentation, pas un audit de sécurité.</span><span data-gl="es" lang="es">PassGate es un kit de implementación de passkeys (WebAuthn) para equipos SaaS que quieren inicio de sesión sin contraseña: un paquete de plantillas de 49 $ o una instalación llave en mano de 299 $ en 48 horas. Es ayuda de implementación, no una auditoría de seguridad.</span><span data-gl="de" lang="de">PassGate ist ein Passkey-(WebAuthn-)Umsetzungskit für SaaS-Teams, die passwortlose Anmeldung wollen: ein Template-Paket für 49 $ oder eine Komplettinstallation für 299 $ innerhalb von 48 Stunden. Es ist Umsetzungshilfe, kein Sicherheitsaudit.</span></p><!--/IA-->
+
+<main id="main" class="wrap tpl-hero">
+  <a class="back" href="./" data-i18n="tpl.back">← Back to PassGate</a>
+  <div class="tpl-head">
+    <div>
+      <p class="eyebrow" style="margin-top:18px"><i></i><span data-i18n="tpl.hero">Template pack</span></p>
+      <h1 data-i18n="tpl.title">Everything in the $49 ZIP</h1>
+      <p class="hero-lede" data-i18n="tpl.lede">Six items, each opened below with what it does and a real excerpt. The archive ships when checkout opens; this page is the spec it is built to.</p>
+    </div>
+    <dl class="meta-strip">
+      <div><dt data-i18n="tpl.meta.version">Version</dt><dd><span class="mono">v0.1</span> <span class="tag" data-i18n="tpl.meta.pre">pre-release</span></dd></div>
+      <div><dt data-i18n="tpl.meta.updated">Page updated</dt><dd class="mono">2026-10-14</dd></div>
+      <div><dt data-i18n="tpl.meta.format">Format</dt><dd data-i18n="tpl.meta.format.v">ZIP · TS + SQL + Markdown</dd></div>
+      <div><dt data-i18n="tpl.meta.sample">Free sample</dt><dd><a class="link" href="./samples/CHECKLIST.md" download data-i18n="tpl.meta.sample.v">CHECKLIST.md ↓</a></dd></div>
+    </dl>
+  </div>
+
+  <div class="local-notice" role="note">
+    <span class="ln-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+    <div>
+      <p class="ln-title" data-i18n="tpl.local.title">The interest form is saved only in this browser</p>
+      <p data-i18n="tpl.local.body">Nothing is sent to a server, no order is created and nothing is charged. Checkout opens later through Creem.</p>
+    </div>
+  </div>
+
+  <div class="tpl-layout">
+    <div class="tpl-main">
+      <section id="files" class="tpl-sec">
+        <div class="sec-row">
+          <h2 data-i18n="tpl.tree.title">Archive layout</h2>
+          <div class="sec-tools">
+            <button type="button" class="chip chip-sm" data-expand="open" data-i18n="tpl.expand">Expand all</button>
+            <button type="button" class="chip chip-sm" data-expand="close" data-i18n="tpl.collapse">Collapse all</button>
+          </div>
+        </div>
+        <p class="sec-lede" data-i18n="tpl.tree.lede">Open any item to see its purpose and a short excerpt. Code blocks have a copy button.</p>
+
+        <div class="files">
+          <details class="file" open>
+            <summary><span class="f-ic dir" aria-hidden="true"></span><code>templates/nextjs-webauthn/</code><span class="f-sum" data-i18n="tpl.f1.sum">Runnable Next.js App Router example</span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f1.what">A small Next.js app you can run locally and copy from: sign-up with a passkey, sign-in, a settings page to list and revoke keys, and recovery codes. Server code uses @simplewebauthn/server; the browser side uses @simplewebauthn/browser.</p>
+              <ul class="f-list">
+                <li data-i18n="tpl.f1.l1">Route handlers for registration and authentication options + verification</li><li data-i18n="tpl.f1.l2">Challenge store with expiry, plus a session cookie after login</li><li data-i18n="tpl.f1.l3">Settings screen: list, rename, revoke passkeys</li><li data-i18n="tpl.f1.l4">Recovery codes: generate, hash, show once, redeem</li>
+              </ul>
+              <div class="code"><div class="code-bar"><span class="mono">app/api/passkey/register/options/route.ts</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>import { generateRegistrationOptions } from "@simplewebauthn/server";
+
+const options = await generateRegistrationOptions({
+  rpName: "Acme",
+  rpID: process.env.RP_ID!, // e.g. app.acme.com
+  userName: user.email,
+  excludeCredentials: user.passkeys.map((k) =&gt; ({ id: k.credentialId })),
+  authenticatorSelection: { residentKey: "preferred", userVerification: "preferred" },
+});</code></pre></div>
+              <figure class="shot">
+                <div class="shot-frame">
+                  <div class="demo-chrome"><div class="demo-dots" aria-hidden="true"><span></span><span></span><span></span></div><div class="demo-url">localhost:3000 / settings / passkeys</div></div>
+                  <div class="mock-keys">
+                    <div class="mk-head"><strong data-i18n="mock.keys.title">Passkeys</strong><span class="btn btn-primary btn-xs" aria-hidden="true" data-i18n="mock.keys.add">Add passkey</span></div>
+                    <div class="mk-row"><span class="mk-dot"></span><div><b>MacBook Pro · Touch ID</b><small data-i18n="mock.keys.r1">Created today · last used 2 min ago</small></div><span class="mk-act" data-i18n="mock.keys.revoke">Revoke</span></div>
+                    <div class="mk-row"><span class="mk-dot"></span><div><b>iPhone · iCloud Keychain</b><small data-i18n="mock.keys.r2">Synced passkey · last used yesterday</small></div><span class="mk-act" data-i18n="mock.keys.revoke">Revoke</span></div>
+                    <div class="mk-row muted"><span class="mk-dot off"></span><div><b data-i18n="mock.keys.rc">Recovery codes</b><small data-i18n="mock.keys.r3">8 of 10 unused · shown once at creation</small></div><span class="mk-act" data-i18n="mock.keys.regen">Regenerate</span></div>
+                  </div>
+                </div>
+                <figcaption data-i18n="tpl.shot.cap1">Illustrative HTML render of the example app's settings screen, not a product screenshot.</figcaption>
+              </figure>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic dir" aria-hidden="true"></span><code>templates/supabase-migration/</code><span class="f-sum" data-i18n="tpl.f2.sum">Password → passkey migration for Supabase</span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f2.what">Steps for adding passkeys next to existing Supabase password accounts, so current users keep working while they enrol a passkey.</p>
+              <ol class="f-steps">
+                <li data-i18n="tpl.f2.s1">Create the passkeys table with row-level security</li><li data-i18n="tpl.f2.s2">Offer "add a passkey" after a normal password login</li><li data-i18n="tpl.f2.s3">Let enrolled users sign in with a passkey first, password as fallback</li><li data-i18n="tpl.f2.s4">Optionally hide the password field once a user has two passkeys</li>
+              </ol>
+              <div class="code"><div class="code-bar"><span class="mono">migrations/001_passkeys.sql</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>create table public.passkeys (
+  id           text primary key,  -- credential ID, base64url
+  user_id      uuid not null references auth.users (id) on delete cascade,
+  public_key   bytea not null,
+  counter      bigint not null default 0,
+  transports   text[],
+  created_at   timestamptz not null default now()
+);
+alter table public.passkeys enable row level security;</code></pre></div>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>templates/clerk-alternative-notes.md</code><span class="f-sum" data-i18n="tpl.f3.sum">Keep Clerk or move out: a decision note</span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f3.what">If you already use Clerk, this note helps you decide whether to keep it and turn on its passkey option, or move auth into your own database.</p>
+              <div class="split2">
+                <div class="mini-card"><h3 class="h4" data-i18n="tpl.f3.keep">Keep Clerk if</h3><ul class="f-list"><li data-i18n="tpl.f3.k1">its built-in passkey option covers what you need</li><li data-i18n="tpl.f3.k2">you rely on its user and organisation management UI</li></ul></div>
+                <div class="mini-card"><h3 class="h4" data-i18n="tpl.f3.move">Move out if</h3><ul class="f-list"><li data-i18n="tpl.f3.m1">you must own the credential table and session format</li><li data-i18n="tpl.f3.m2">pricing per active user no longer fits your plan</li></ul></div>
+              </div>
+              <div class="code"><div class="code-bar"><span class="mono">clerk-alternative-notes.md</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>## Decision in one question
+Do you need to own the credential table and the session format?
+- No  → keep Clerk, turn on its passkey option, stop here.
+- Yes → follow supabase-migration/ or the custom-JWT path.
+
+We do not reverse-engineer or bypass Clerk.</code></pre></div>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>CHECKLIST.md</code><span class="f-sum" data-i18n="tpl.f4.sum">30 go-live checks</span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f4.what">Thirty checks to run before you turn passkeys on in production, grouped by config, ceremony, storage, UX, recovery and operations.</p>
+              <div class="code"><div class="code-bar"><span class="mono">CHECKLIST.md · 6 / 30</span><button type="button" class="copy" data-i18n="tpl.copy">Copy</button></div>
+<pre><code>- [ ] 1. RP ID is the registrable domain users sign in on
+- [ ] 2. Expected origin lists every production origin explicitly, no wildcards
+- [ ] 6. Challenges are random, single-use and expire within 5 minutes
+- [ ] 14. Signature counter is compared on each login
+- [ ] 18. Users can rename and revoke a passkey
+- [ ] 22. Recovery codes are generated with a CSPRNG and stored hashed</code></pre></div>
+              <p class="dl-row"><a class="btn btn-ghost btn-sm" href="./samples/CHECKLIST.md" download data-i18n="tpl.f4.dl">Download the full CHECKLIST.md (free)</a></p>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>TEST_PLAN.md</code><span class="f-sum" data-i18n="tpl.f5.sum">Browser and device test matrix</span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f5.what">A matrix of browsers, operating systems and flows to test by hand, with a column for passkey autofill (conditional UI).</p>
+              <div class="matrix-wrap">
+                <table class="matrix">
+                  <thead><tr><th data-i18n="tpl.f5.h.env">Environment</th><th data-i18n="tpl.f5.h.reg">Register</th><th data-i18n="tpl.f5.h.login">Sign in</th><th data-i18n="tpl.f5.h.auto">Autofill</th></tr></thead>
+                  <tbody>
+                    <tr><td>Chrome · Windows 11</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Safari · macOS</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Safari · iOS</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Chrome · Android</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td>Firefox · desktop</td><td>□</td><td>□</td><td>□</td></tr>
+                    <tr><td data-i18n="tpl.f5.cross">Phone as key (QR, cross-device)</td><td>□</td><td>□</td><td>—</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="fine" data-i18n="tpl.f5.note">The boxes are empty for you to tick. The $499 plan includes a filled-in record for your app.</p>
+            </div>
+          </details>
+
+          <details class="file">
+            <summary><span class="f-ic doc" aria-hidden="true"></span><code>LICENSE</code><span class="f-sum" data-i18n="tpl.f6.sum">Commercial use terms</span></summary>
+            <div class="f-body">
+              <p data-i18n="tpl.f6.what">A short commercial licence: use the code in your own products and client work, but do not resell the template itself.</p>
+              <p class="fine"><a class="link" href="#license" data-i18n="tpl.f6.jump">See the can / cannot summary below ↓</a></p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section id="compat" class="tpl-sec">
+        <h2 data-i18n="tpl.compat.title">Compatibility</h2>
+        <p class="sec-lede" data-i18n="tpl.compat.lede">What the example targets. Other stacks can follow the same steps, but these are the versions the code is written for.</p>
+        <div class="matrix-wrap">
+          <table class="matrix compat">
+            <thead><tr><th data-i18n="tpl.compat.h.part">Part</th><th data-i18n="tpl.compat.h.ver">Target version</th><th data-i18n="tpl.compat.h.status">Covered by</th></tr></thead>
+            <tbody>
+              <tr><td>Next.js (App Router)</td><td class="mono">14.2+ · 15</td><td data-i18n="tpl.compat.c1">Runnable example</td></tr>
+              <tr><td>Node.js</td><td class="mono">20 LTS+</td><td data-i18n="tpl.compat.c2">Example + CI script</td></tr>
+              <tr><td>@simplewebauthn/server · browser</td><td class="mono">v13</td><td data-i18n="tpl.compat.c1">Runnable example</td></tr>
+              <tr><td>Supabase (Postgres + Auth)</td><td class="mono">supabase-js v2</td><td data-i18n="tpl.compat.c3">Migration SQL + steps</td></tr>
+              <tr><td data-i18n="tpl.compat.jwt">Custom JWT session</td><td class="mono">jose v5</td><td data-i18n="tpl.compat.c4">Notes + snippet</td></tr>
+              <tr><td>Clerk</td><td>—</td><td data-i18n="tpl.compat.c5">Decision notes only</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fine" data-i18n="tpl.compat.note">Targets, not certifications. Versions will be re-checked and noted in the changelog when the ZIP ships.</p>
+      </section>
+
+      <section id="license" class="tpl-sec">
+        <h2 data-i18n="tpl.lic.title">License in plain words</h2>
+        <div class="split2">
+          <div class="mini-card can"><h3 class="h4" data-i18n="tpl.lic.can">You can</h3><ul class="f-list"><li data-i18n="tpl.lic.c1">Use the code in any number of your own products, commercial included</li><li data-i18n="tpl.lic.c2">Use it in client projects you build and hand over</li><li data-i18n="tpl.lic.c3">Modify it freely; no attribution needed in your product</li></ul></div>
+          <div class="mini-card cannot"><h3 class="h4" data-i18n="tpl.lic.cannot">You cannot</h3><ul class="f-list"><li data-i18n="tpl.lic.n1">Resell, sublicense or share the template itself</li><li data-i18n="tpl.lic.n2">Ship it inside a boilerplate, starter kit or course</li><li data-i18n="tpl.lic.n3">Publish the unmodified source in a public repo</li></ul></div>
+        </div>
+        <p class="fine" data-i18n="tpl.lic.note">Summary only. The LICENSE file in the ZIP is the binding text.</p>
+      </section>
+
+      <section id="delivery" class="tpl-sec">
+        <h2 data-i18n="tpl.del.title">Delivery and refunds</h2>
+        <div class="split2">
+          <div class="mini-card"><h3 class="h4" data-i18n="tpl.del.how">How you get it</h3><p data-i18n="tpl.del.how.d">After paying through Creem you get a download link for the ZIP and a welcome email with quick start, environment variables and five common errors.</p></div>
+          <div class="mini-card"><h3 class="h4" data-i18n="tpl.del.refund">Refunds</h3><p data-i18n="tpl.del.refund.d">Digital goods: refunded only if the ZIP fails to download within 24 hours and we cannot fix it. Upgrading to an install is always possible.</p></div>
+        </div>
+      </section>
+
+      <section id="tpl-faq" class="tpl-sec faq">
+        <h2 data-i18n="nav.faq">FAQ</h2>
+        <details><summary data-i18n="tpl.q1">Do I need Next.js?</summary><p data-i18n="tpl.a1">No. The example is Next.js, but the checklist, test plan and Supabase steps apply to any web stack that can run a WebAuthn server library.</p></details>
+        <details><summary data-i18n="tpl.q2">Does it work with the Pages Router?</summary><p data-i18n="tpl.a2">The example uses the App Router. The server logic is plain functions, so moving it into API routes is a small change.</p></details>
+        <details><summary data-i18n="tpl.q3">Will the template be updated?</summary><p data-i18n="tpl.a3">Every change is listed in the changelog below with its date.</p></details>
+        <details><summary data-i18n="tpl.q4">Where does the interest form go?</summary><p data-i18n="tpl.a4">Nowhere. It is saved in this browser's localStorage only. Nothing is sent to us, and it is not an order.</p></details>
+        <details><summary data-i18n="faq.1.q">Is this a security audit?</summary><p data-i18n="faq.1.a">No. PassGate is implementation help and a template. It does not certify your product. Responsibility boundaries are written into the order.</p></details>
+      </section>
+
+      <section id="changelog" class="tpl-sec">
+        <h2 data-i18n="tpl.nav.changelog">Changelog</h2>
+        <ol class="changelog">
+          <li><time class="mono" datetime="2026-10-14">2026-10-14</time><div><b data-i18n="tpl.cl1.t">Template page rebuilt</b><p data-i18n="tpl.cl1.d">Each file now opens with its purpose and an excerpt, plus a compatibility table, license summary, FAQ, free CHECKLIST.md sample and 10 languages.</p></div></li>
+          <li><time class="mono" datetime="2026-10-12">2026-10-12</time><div><b data-i18n="tpl.cl2.t">PassGate site launched</b><p data-i18n="tpl.cl2.d">Landing page and template page in Simplified Chinese and English. Checkout shown as a placeholder.</p></div></li>
+          <li class="next"><span class="mono" data-i18n="tpl.cl3.when">Next</span><div><b data-i18n="tpl.cl3.t">v0.1 ZIP and Creem checkout</b><p data-i18n="tpl.cl3.d">The archive and payment links go live together. Not dated yet.</p></div></li>
+        </ol>
+      </section>
+    </div>
+
+    <aside class="tpl-side">
+      <section class="form-card">
+        <h2 data-i18n="tpl.form.title">Notify me / order placeholder</h2>
+        <p class="form-warn" data-i18n="tpl.local.short">Saved only in this browser. Not sent anywhere, not an order.</p>
+        <form id="interest-form">
+          <div class="field">
+            <label for="email" data-i18n="tpl.form.email">Work email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
+          </div>
+          <div class="field">
+            <label for="plan" data-i18n="tpl.form.plan">Plan interest</label>
+            <select id="plan" name="plan">
+              <option value="template" data-i18n="tpl.form.plan.t">Template $49</option>
+              <option value="install" data-i18n="tpl.form.plan.i">Install $299</option>
+              <option value="plus" data-i18n="tpl.form.plan.p">Install + notes $499</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="stack" data-i18n="tpl.form.stack">Stack (optional)</label>
+            <input id="stack" name="stack" type="text" data-i18n-placeholder="tpl.form.stack.ph" placeholder="Next.js + Supabase">
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="tpl.form.submit">Save interest in this browser</button>
+          <p class="form-note" data-i18n="tpl.form.note">Checkout opening soon. This form does not charge you and does not reach a server.</p>
+          <div class="form-ok" id="form-ok" role="status" data-i18n="tpl.form.saved">Saved in this browser only. Nothing was sent or charged.</div>
+        </form>
+      </section>
+      <section class="side-card">
+        <h2 data-i18n="tpl.side.title">At a glance</h2>
+        <ul class="glance">
+          <li><span data-i18n="tpl.side.price">Price</span><b>$49</b></li>
+          <li><span data-i18n="tpl.side.files">Top-level items</span><b>6</b></li>
+          <li><span data-i18n="tpl.side.checks">Go-live checks</span><b>30</b></li>
+          <li><span data-i18n="tpl.side.checkout">Checkout</span><b data-i18n="soon">Checkout opening soon</b></li>
+        </ul>
+        <a class="btn btn-ghost btn-sm" href="./samples/CHECKLIST.md" download data-i18n="tpl.f4.dl">Download the full CHECKLIST.md (free)</a>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<!--IA--><aside class="sub-band" aria-label="Newsletter"><div data-ie-sub data-site="passgate" data-source="template"></div></aside><!--/IA--><footer class="footer">
+  <div class="wrap footer-inner">
+    <span data-i18n="footer.tag">PassGate · passkey migration pack · independent product</span>
+    <span data-i18n="footer.soon">Checkout opening soon · nothing is charged yet</span>
+  </div>
+</footer>
+
+<div class="modal" id="checkout-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <h3 id="modal-title" data-i18n="modal.title">Checkout coming soon</h3>
+    <p data-i18n="modal.body">Creem payment links are not live yet, so nothing can be charged. The template pack page lists every file and has an interest form that is saved only in your browser.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="modal-close" data-i18n="modal.close">Close</button>
+    </div>
+  </div>
+</div>
+<script src="./app.js?v=__V__" defer></script>
+</body>
+</html>
