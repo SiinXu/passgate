@@ -1,7 +1,7 @@
 // Build worker.mjs (static asset map + server/api.mjs) and deploy snippet for the Cloudflare MCP execute tool.
 import fs from "fs"; import zlib from "zlib"; import crypto from "crypto";
 const T={html:"text/html; charset=utf-8",css:"text/css; charset=utf-8",js:"application/javascript; charset=utf-8",json:"application/json; charset=utf-8",md:"text/markdown; charset=utf-8",txt:"text/plain; charset=utf-8",svg:"image/svg+xml",png:"image/png",xml:"application/xml; charset=utf-8",woff2:"font/woff2"};
-const files=["index.html","template.html","success.html","robots.txt","llms.txt","llms-full.txt","og.png",...fs.readdirSync(".").filter(f=>/^sitemap.*\.xml$/.test(f)),"styles.css","app.js","samples/CHECKLIST.md",...fs.readdirSync("i18n").map(f=>"i18n/"+f),...fs.readdirSync("fonts").map(f=>"fonts/"+f)];
+const files=["index.html","template.html","success.html","privacy.html","terms.html","refund.html","robots.txt","llms.txt","llms-full.txt","og.png",...fs.readdirSync(".").filter(f=>/^sitemap.*\.xml$/.test(f)),"styles.css","app.js","samples/CHECKLIST.md",...fs.readdirSync("i18n").map(f=>"i18n/"+f),...fs.readdirSync("fonts").map(f=>"fonts/"+f)];
 const h=crypto.createHash("sha1");for(const f of files)h.update(fs.readFileSync(f));h.update(fs.readFileSync("server/api.mjs"));const V=h.digest("hex").slice(0,10);
 const F={};for(const f of files){let buf=fs.readFileSync(f);if(/\.(html|js)$/.test(f))buf=Buffer.from(buf.toString("utf8").replaceAll("__V__",V));F["/"+f]=[T[f.split(".").pop()],buf.toString("base64")]}
 F["/"]=F["/index.html"];

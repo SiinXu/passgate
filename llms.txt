@@ -5,6 +5,11 @@
 - Template pack: https://passgate.incidental.site/template
 - Checklist sample: https://passgate.incidental.site/samples/CHECKLIST.md
 - Languages: en (default), zh-CN, zh-TW, ja, ko, ms, vi, fr, es, de — append ?lang=<code>
+- Privacy: https://passgate.incidental.site/privacy
+- Terms: https://passgate.incidental.site/terms
+- Refund policy: https://passgate.incidental.site/refund (template: 14-day refund on request; install: full refund before work starts)
+- Payments: Creem (Armitage Labs OÜ) is the merchant of record
+- Support: support@incidental.site
 - Full text: https://passgate.incidental.site/llms-full.txt
 - Sitemap: https://passgate.incidental.site/sitemap.xml
 - Publisher: Incidental AI (https://incidental.site/)

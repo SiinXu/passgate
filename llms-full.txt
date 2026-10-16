@@ -5,14 +5,18 @@
 - Template pack: https://passgate.incidental.site/template
 - Checklist sample: https://passgate.incidental.site/samples/CHECKLIST.md
 - Languages: en (default), zh-CN, zh-TW, ja, ko, ms, vi, fr, es, de — append ?lang=<code>
+- Privacy: https://passgate.incidental.site/privacy
+- Terms: https://passgate.incidental.site/terms
+- Refund policy: https://passgate.incidental.site/refund (template: 14-day refund on request; install: full refund before work starts)
+- Payments: Creem (Armitage Labs OÜ) is the merchant of record
+- Support: support@incidental.site
 - Full text: https://passgate.incidental.site/llms-full.txt
 - Sitemap: https://passgate.incidental.site/sitemap.xml
 - Publisher: Incidental AI (https://incidental.site/)
-
 ## Page copy (English)
 - Add passkeys to your SaaS in 48 hours
 - Ship passwordless login with a DIY template ($49) or book a fixed-fee install ($299). Recovery codes, browser matrix, and a PR you can merge.
-- Checkout opens soon via Creem. Nothing is charged yet.
+- Secure checkout by Creem, our merchant of record. Taxes are handled at checkout.
 - Demo specimen — not a live auth endpoint
 - 2 passkeys · Face ID · security key
 - Reset tickets are silent burn
@@ -59,15 +63,11 @@
 - Can I upgrade from template to install?
 - Yes. Template buyers can book an install. The $49 is not deducted unless a promotion says so.
 - PassGate does not provide a security audit, penetration test or compliance certification (SOC 2, ISO, etc.). You remain responsible for production configuration, RP ID, secret handling and release decisions. Each order documents what is in and out of scope.
-- See every file in the template pack, or leave your email there. It stays in your browser until checkout opens.
+- See every file in the template pack, or leave your email there and we will tell you when checkout opens.
 - PassGate · passkey migration pack · independent product
-- Contact opens together with checkout
-- Checkout opening soon · nothing is charged yet
-- Creem payment links are not live yet, so nothing can be charged. The template pack page lists every file and has an interest form that is saved only in your browser.
-- Six items, each opened below with what it does and a real excerpt. The archive ships when checkout opens; this page is the spec it is built to.
-- The interest form is saved only in this browser
-- Nothing is sent to a server, no order is created and nothing is charged. Checkout opens later through Creem.
-- Saved only in this browser. Not sent anywhere, not an order.
+- Support: support@incidental.site
+- Six items, each opened below with what it does and a real excerpt.
+- The interest form goes to PassGate, not to a checkout. Your email, plan and stack are stored only so we can reply; no order is created and nothing is charged.
 - Open any item to see its purpose and a short excerpt. Code blocks have a copy button.
 - Runnable Next.js App Router example
 - A small Next.js app you can run locally and copy from: sign-up with a passkey, sign-in, a settings page to list and revoke keys, and recovery codes. Server code uses @simplewebauthn/server; the browser side uses @simplewebauthn/browser.
@@ -105,15 +105,15 @@
 - Will the template be updated?
 - Every change is listed in the changelog below with its date.
 - Where does the interest form go?
-- Nowhere. It is saved in this browser's localStorage only. Nothing is sent to us, and it is not an order.
+- To PassGate's own server. We keep your email, plan and stack only to reply. It is not an order, and you can ask us to delete it at any time.
 - Each file now opens with its purpose and an excerpt, plus a compatibility table, license summary, FAQ, free CHECKLIST.md sample and 10 languages.
 - Landing page and template page in Simplified Chinese and English. Checkout shown as a placeholder.
-- v0.1 ZIP and Creem checkout
-- The archive and payment links go live together. Not dated yet.
 - Notify me / order placeholder
 - Next.js + Supabase, custom JWT, …
-- Save interest in this browser
-- Checkout opening soon. This form does not charge you and does not reach a server.
-- Saved in this browser only. Nothing was sent or charged.
 
-(License and refund wording is still being finalised and is intentionally omitted here.)
+## Policies
+- Payments: Creem (Armitage Labs OÜ) is the merchant of record and handles payment, sales tax/VAT and receipts.
+- Refunds: template pack refunded in full on request within 14 days of purchase; install refunded in full before work starts, 50% if we miss the 48h window for reasons on our side. https://passgate.incidental.site/refund
+- License: use the code in your own products and client work; do not resell, sublicense or share the template itself. https://passgate.incidental.site/terms
+- Privacy: only email, plan and stack from forms; cookieless Cloudflare Web Analytics plus first-party event counting; no data is sold. https://passgate.incidental.site/privacy
+- Support: support@incidental.site
