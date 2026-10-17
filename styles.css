@@ -852,6 +852,7 @@ html[data-theme="light"] .key-orb { background: linear-gradient(145deg, #fff, #d
 .dl-row { margin: 0; }
 .tpl-sec.faq details { margin-bottom: 8px; }
 
+/* allow-left-border: changelog timeline (not a callout) */
 .changelog { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); margin-left: 6px; }
 .changelog li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 0 0 22px 22px; position: relative; }
 .changelog li::before { content: ""; position: absolute; left: -5px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--bg); }
