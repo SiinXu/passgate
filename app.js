@@ -186,6 +186,8 @@
     const showErr = (code, field) => { ev("form_error", { form: "interest", field: field || "", reason: code }); showMsg(code); };
     const showMsg = (code) => { if (!err) return; err.textContent = errText(code); err.hidden = false; ok?.classList.remove("show"); };
     const EMAIL = /^[^\s@<>()"',;:]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+    const emailEl = form.querySelector("#email");
+    if (emailEl) emailEl.addEventListener("focus", () => ev("lead_form_start", { form: "interest" }), { once: true });
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (btn?.getAttribute("aria-busy") === "true") return;
@@ -197,8 +199,11 @@
       if (btn) { btn.setAttribute("aria-busy", "true"); btn.textContent = tr("form.sending", "Sending…"); }
       const d = await postJSON("/api/interest", { email, plan: data.plan, stack: data.stack || "", website: data.website || "", lang: current, t: T0, ...intFlags() });
       if (btn) { btn.removeAttribute("aria-busy"); btn.textContent = label; }
-      if (!d.ok) { showErr(d.code || "server", d.code === "invalid_email" ? "email" : d.code === "invalid_plan" ? "plan" : ""); return; }
+      if (!d.ok) { showErr(d.code || "server", d.code === "invalid_email" ? "email" : d.code === "invalid_plan" ? "plan" : ""); ev("lead_submit", { form: "interest", ok: false, reason: d.code || "server", plan: data.plan }); return; }
       ok?.classList.add("show");
+      // lead_submit is the canonical interest event for stats; subscribe{source:interest} kept for /api/passgate funnel.
+      // Server also writes both into ev on /api/interest success (reliable even if beacon drops).
+      ev("lead_submit", { form: "interest", ok: true, plan: data.plan });
       ev("subscribe", { source: "interest", plan: data.plan });
       form.reset();
     });
@@ -223,6 +228,10 @@
       q("[data-ok-ref]").textContent = p.get("order_id") || p.get("checkout_id") || "—";
       q("[data-ok-meta]").hidden = false;
       q("[data-ok-test]").hidden = d.mode === "live";
+      // Funnel ping only. Conversion convert{goal:purchase} is written server-side by the Creem webhook
+      // (or by /api/checkout/verify backup). Never fire purchase convert from the client — avoids double-count
+      // and keeps test-mode purchases tagged internal/creem_test out of external metrics.
+      ev("form_submit", { form: "checkout_success", plan: d.plan || "", mode: d.mode || "", paid: !!d.paid });
     }
     await setLang(current, false);
   }

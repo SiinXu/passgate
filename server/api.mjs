@@ -87,6 +87,16 @@ async function interest(req, env) {
   const f = flags(b, uaFamily(req.headers.get("User-Agent")) === "bot" ? "bot_ua" : "");
   await env.DB.prepare("INSERT INTO pg_interest (ts,email,plan,stack,lang,iph,country,ua,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?)")
     .bind(now, email, plan, stack, lang, iph, (req.cf && req.cf.country) || "", uaFamily(req.headers.get("User-Agent")), f.internal, f.irule).run();
+  // Report interest to shared stats (ev), not only pg_interest / client beacon.
+  const props = JSON.stringify({ form: "interest", plan, ok: true, source: "interest" });
+  const country = (req.cf && req.cf.country) || "";
+  const ua = uaFamily(req.headers.get("User-Agent"));
+  try {
+    await env.DB.prepare("INSERT INTO ev (ts,day,site,event,path,lang,props,country,ua,ref,src,med,camp,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+      .bind(now, day(now), "passgate", "lead_submit", "/api/interest", lang, props, country, "server", "", "", "", "", f.internal, f.irule).run();
+    await env.DB.prepare("INSERT INTO ev (ts,day,site,event,path,lang,props,country,ua,ref,src,med,camp,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+      .bind(now, day(now), "passgate", "subscribe", "/api/interest", lang, JSON.stringify({ source: "interest", plan }), country, "server", "", "", "", "", f.internal, f.irule).run();
+  } catch (e) { console.error("interest ev", String(e && e.message || e)); }
   return J({ ok: true });
 }
 
@@ -160,14 +170,30 @@ async function verify(req, env) {
     const data = pairs.filter(([k, v]) => k !== "signature" && v !== "").map(([k, v]) => k + "=" + v).concat("salt=" + env.CREEM_API_KEY).join("|");
     verified = sameBytes(await sha256(data), sig);
   }
-  let plan = null, paid = false;
+  let plan = null, paid = false, recorded = false;
   if (verified) {
     await schema(env);
-    const c = await env.DB.prepare("SELECT plan FROM pg_checkouts WHERE id=?").bind(checkout_id).first();
-    const p = await env.DB.prepare("SELECT plan,status FROM pg_purchases WHERE checkout_id=?").bind(checkout_id).first();
+    const c = await env.DB.prepare("SELECT plan,mode,internal,irule FROM pg_checkouts WHERE id=?").bind(checkout_id).first();
+    const p = await env.DB.prepare("SELECT order_id,plan,status,amount,currency,mode,internal,irule,lang FROM pg_purchases WHERE checkout_id=?").bind(checkout_id).first();
     plan = (p && p.plan) || (c && c.plan) || null; paid = !!(p && p.status === "paid");
+    // Backup path: if webhook already wrote pg_purchases but convert{goal:purchase} is missing, write it once.
+    // Test / internal purchases stay flagged so they never enter external conversion metrics.
+    if (paid && p) {
+      const exists = await env.DB.prepare("SELECT id FROM ev WHERE site=? AND event=? AND json_extract(props,'$.goal')=? AND (json_extract(props,'$.checkout_id')=? OR json_extract(props,'$.order_id')=?) LIMIT 1")
+        .bind("passgate", "convert", "purchase", checkout_id, p.order_id).first();
+      if (!exists) {
+        const test = mode(env) !== "live" || /test|sandbox/i.test(String(p.mode || "")) || /creem_test/.test(String(p.irule || ""));
+        const internal = (p.internal || (c && c.internal) || (test ? 1 : 0)) ? 1 : 0;
+        const irule = S(p.irule || (c && c.irule) || (test ? "creem_test" : ""), 80);
+        const props = JSON.stringify({ goal: "purchase", plan: p.plan, amount: Number(p.amount) || 0, currency: S(p.currency, 8), mode: test ? "test" : "live", source: "checkout_verify", checkout_id, order_id: p.order_id });
+        const now = Date.now();
+        await env.DB.prepare("INSERT INTO ev (ts,day,site,event,path,lang,props,country,ua,ref,src,med,camp,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+          .bind(now, day(now), "passgate", "convert", "/success", S(p.lang, 10), props, "", "server", "creem.io", "", "", "", internal, irule).run();
+        recorded = true;
+      }
+    }
   }
-  return J({ ok: true, verified, plan, paid, mode: mode(env) });
+  return J({ ok: true, verified, plan, paid, mode: mode(env), recorded });
 }
 
 // ---------- POST /api/creem/webhook ----------
@@ -205,7 +231,7 @@ async function handleEvent(env, type, o, now, m) {
     const ins = await env.DB.prepare("INSERT OR IGNORE INTO pg_purchases (order_id,checkout_id,product_id,plan,amount,currency,email,customer_id,mode,status,lang,ts,updated,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
       .bind(orderId, S(o.id, 80), S(product.id || order.product, 80), plan, Number(order.amount_paid ?? order.amount) || 0, S(order.currency, 8), S(cust.email, 254).toLowerCase(), S(cust.id || order.customer, 80), S(o.mode, 16) || m, "paid", lang, now, now, internal, irule).run();
     if (ins.meta && ins.meta.changes > 0) {
-      const props = JSON.stringify({ goal: "purchase", plan, amount: Number(order.amount_paid ?? order.amount) || 0, currency: S(order.currency, 8), mode: test ? "test" : "live", source: "creem_webhook" });
+      const props = JSON.stringify({ goal: "purchase", plan, amount: Number(order.amount_paid ?? order.amount) || 0, currency: S(order.currency, 8), mode: test ? "test" : "live", source: "creem_webhook", checkout_id: S(o.id, 80), order_id: orderId });
       await env.DB.prepare("INSERT INTO ev (ts,day,site,event,path,lang,props,country,ua,ref,src,med,camp,internal,irule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
         .bind(now, day(now), "passgate", "convert", "/api/creem/webhook", lang, props, S(cust.country, 4), "server", "creem.io", "", "", "", internal, irule).run();
       return { note: "recorded" };
