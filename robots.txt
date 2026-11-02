@@ -19,4 +19,8 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
+# 2026-11-01: SEO-tool crawler, not a search or AI engine: disallow everything
+User-agent: SemrushBot
+Disallow: /
+
 Sitemap: https://passgate.incidental.site/sitemap.xml
